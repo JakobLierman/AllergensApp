@@ -1,16 +1,27 @@
 package domain;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * The type Product.
  */
+@Entity
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Basic
     private String name;
+    @Basic
     private String description;
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Ingredient> ingredients;
+
+    public Product() {
+    }
 
     /**
      * Instantiates a new Product.
@@ -92,7 +103,10 @@ public class Product {
      */
     public Set<Allergen> getAllergens() {
         Set<Allergen> allergens = new HashSet<>();
-        this.ingredients.forEach(ingredient -> allergens.addAll(ingredient.getAllergens()));
+        this.ingredients.forEach(ingredient -> {
+            if (ingredient.HasAllergen())
+                allergens.add(ingredient.getAllergen());
+        });
         return allergens;
     }
 }

@@ -1,26 +1,35 @@
 package domain;
 
-import java.util.Set;
+import javax.persistence.*;
 
 /**
  * The type Ingredient.
  */
+@Entity
 public class Ingredient {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Basic
     private String name;
-    private Set<Allergen> allergens;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Allergen allergen;
+
+    public Ingredient() {
+    }
 
     /**
      * Instantiates a new Ingredient.
      *
-     * @param name      the name
-     * @param allergens the allergens
+     * @param name     the name
+     * @param allergen the allergen
      */
-    public Ingredient(String name, Set<Allergen> allergens) {
+    public Ingredient(String name, Allergen allergen) {
         if (name.isEmpty())
             throw new NullPointerException("Name can't be empty.");
         this.name = name;
-        this.allergens = allergens;
+        this.allergen = allergen;
     }
 
     /**
@@ -44,30 +53,30 @@ public class Ingredient {
     }
 
     /**
-     * Gets allergens.
+     * Gets allergen.
      *
-     * @return the allergens
+     * @return the allergen
      */
-    public Set<Allergen> getAllergens() {
-        return allergens;
+    public Allergen getAllergen() {
+        return allergen;
     }
 
     /**
-     * Sets allergens.
+     * Sets allergen.
      *
-     * @param allergens the allergens
+     * @param allergens the allergen
      */
-    public void setAllergens(Set<Allergen> allergens) {
-        this.allergens = allergens;
+    public void setAllergens(Allergen allergens) {
+        this.allergen = allergens;
     }
 
     /**
-     * Has allergens boolean.
+     * Has allergen boolean.
      *
      * @return the boolean
      */
-    public boolean HasAllergens() {
-        return this.allergens.isEmpty();
+    public boolean HasAllergen() {
+        return this.allergen == null;
     }
 
 }

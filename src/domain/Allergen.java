@@ -1,11 +1,21 @@
 package domain;
 
+import javax.persistence.*;
+
 /**
  * The type Allergen.
  */
+@Entity
 public class Allergen {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Basic
     private String name;
+
+    public Allergen() {
+    }
 
     /**
      * Instantiates a new Allergen.
