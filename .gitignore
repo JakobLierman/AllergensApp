@@ -40,3 +40,7 @@ manifest\.mf
 
 # Visual Paradigm
 /vpproject/
+
+\.DS_Store
+
+AllergensApp\.vpdm/
