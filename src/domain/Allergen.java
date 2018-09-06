@@ -5,6 +5,8 @@ public class Allergen {
     private String name;
 
     public Allergen(String name) {
+        if (name.isEmpty())
+            throw new NullPointerException("Name can't be empty.");
         this.name = name;
     }
 
@@ -13,6 +15,8 @@ public class Allergen {
     }
 
     public void setName(String name) {
+        if (name.isEmpty())
+            throw new NullPointerException("Name can't be empty.");
         this.name = name;
     }
 
