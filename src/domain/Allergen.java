@@ -10,8 +10,10 @@ public class Allergen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private int id;
     @Basic
+    @Column(name = "name", nullable = false)
     private String name;
 
     public Allergen() {

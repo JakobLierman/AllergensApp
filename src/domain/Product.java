@@ -12,12 +12,15 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private int id;
     @Basic
+    @Column(name = "name", nullable = false)
     private String name;
     @Basic
     private String description;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
+    @JoinColumn(name = "product_id")
     private Set<Ingredient> ingredients;
 
     public Product() {

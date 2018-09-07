@@ -10,10 +10,12 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private int id;
     @Basic
+    @Column(name = "name", nullable = false)
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
+    @javax.persistence.ManyToOne(optional = false)
     private Allergen allergen;
 
     public Ingredient() {
