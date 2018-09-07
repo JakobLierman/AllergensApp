@@ -1,8 +1,9 @@
 package domain;
 
 import repository.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.xml.registry.DeleteException;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -10,9 +11,9 @@ import java.util.Set;
  */
 public class ProductManager {
 
-    private IGenericDao<Product> productRepo;
-    private IGenericDao<Ingredient> ingredientRepo;
-    private IGenericDao<Allergen> allergenRepo;
+    private IProductDao productRepo;
+    private IIngredientDao ingredientRepo;
+    private IAllergenDao allergenRepo;
 
     /**
      * Instantiates a new Product manager.
@@ -24,165 +25,243 @@ public class ProductManager {
     }
 
     /**
-     * Create product.
+     * Creates product in the database.
      *
      * @param name        the name
      * @param description the description (can be null)
      * @param ingredients the ingredients
      */
     public void createProduct(String name, String description, Set<Ingredient> ingredients) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+        Product product = new Product(name.trim(), ingredients);
+        if (!description.isEmpty()) {
+            product.setDescription(description);
+        }
+        insertItem(product);
     }
 
     /**
-     * Duplicate product.
+     * Duplicates product from the database.
      *
      * @param product the product
      */
     public void duplicateProduct(Product product) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+        Product duplicate = new Product();
+        duplicate.setName(product.getName() + "_copy");
+        duplicate.setIngredients(product.getIngredients());
+        if (!product.getDescription().isEmpty())
+            duplicate.setDescription(product.getDescription());
+        insertItem(product);
     }
 
     /**
-     * Remove product.
+     * Removes product from the database.
      *
      * @param product the product
      */
     public void removeProduct(Product product) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+        deleteItem(product);
     }
 
     /**
-     * Alter product.
+     * Alters product in the database.
      *
      * @param oldName     the old name
      * @param newName     the new name
      * @param ingredients the ingredients
+     * @param description the description
      */
-    public void alterProduct(String oldName, String newName, Set<Ingredient> ingredients) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+    public void alterProduct(String oldName, String newName, Set<Ingredient> ingredients, String description) {
+        Product product = getProductByName(oldName);
+        product.setName(newName.trim());
+        product.setIngredients(ingredients);
+        product.setDescription(description);
+        updateItem(oldName, product);
     }
 
     /**
-     * Gets product by name.
+     * Gets product by name from the database.
      *
      * @param name the name
      * @return the product by name
      */
     public Product getProductByName(String name) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+        return (Product) getItemByName("product", name);
     }
 
     /**
-     * Create ingredient.
+     * Gets all products from the database.
      *
-     * @param name      the name
-     * @param allergens the allergens
+     * @return the products
      */
-    public void createIngredient(String name, Set<Allergen> allergens) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+    public Collection<Product> getProducts() {
+        GenericDao.startTransaction();
+        Collection<Product> products = productRepo.findAll();
+        GenericDao.commitTransaction();
+        return products;
     }
 
     /**
-     * Duplicate ingredient.
+     * Creates ingredient in the database.
+     *
+     * @param name     the name
+     * @param allergen the allergen
+     */
+    public void createIngredient(String name, Allergen allergen) {
+        Ingredient ingredient = new Ingredient(name, allergen);
+        insertItem(ingredient);
+    }
+
+    /**
+     * Duplicates ingredient from the database.
      *
      * @param ingredient the ingredient
      */
     public void duplicateIngredient(Ingredient ingredient) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+        Ingredient duplicate = new Ingredient();
+        duplicate.setName(ingredient.getName() + "_copy");
+        duplicate.setAllergen(ingredient.getAllergen());
+        insertItem(duplicate);
     }
 
     /**
-     * Remove ingredient.
+     * Removes ingredient from the database.
      *
      * @param ingredient the ingredient
+     * @throws DeleteException if the ingredient is still being used in a product.
      */
-    public void removeIngredient(Ingredient ingredient) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+    public void removeIngredient(Ingredient ingredient) throws DeleteException {
+        for (Product product : getProducts()) {
+            if (product.getIngredients().contains(ingredient))
+                throw new DeleteException();
+        }
+        deleteItem(ingredient);
     }
 
     /**
-     * Alter ingredient.
+     * Alters ingredient from the database.
      *
-     * @param oldName   the old name
-     * @param newName   the new name
-     * @param allergens the allergens
+     * @param oldName  the old name
+     * @param newName  the new name
+     * @param allergen the allergen
      */
-    public void alterIngredient(String oldName, String newName, Set<Allergen> allergens) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+    public void alterIngredient(String oldName, String newName, Allergen allergen) {
+        Ingredient ingredient = getIngredientByName(oldName);
+        ingredient.setName(newName.trim());
+        ingredient.setAllergen(allergen);
+        updateItem(oldName, ingredient);
     }
 
     /**
-     * Gets ingredient by name.
+     * Gets ingredient by name from the database.
      *
      * @param name the name
      * @return the ingredient by name
      */
-    public Product getIngredientByName(String name) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+    public Ingredient getIngredientByName(String name) {
+        return (Ingredient) getItemByName("Ingredient", name);
     }
 
     /**
-     * Create allergen.
+     * Gets all ingredients from the database.
      *
-     * @param name the name
+     * @return the ingredients
      */
-    public void createAllergen(String name) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+    public Collection<Ingredient> getIngredients() {
+        GenericDao.startTransaction();
+        Collection<Ingredient> ingredients = ingredientRepo.findAll();
+        GenericDao.commitTransaction();
+        return ingredients;
     }
 
     /**
-     * Duplicate allergen.
-     *
-     * @param allergen the allergen
-     */
-    public void duplicateAllergen(Allergen allergen) {
-        // TODO - Implementation
-        throw new NotImplementedException();
-    }
-
-    /**
-     * Remove allergen.
-     *
-     * @param allergen the allergen
-     */
-    public void removeAllergen(Allergen allergen) {
-        // TODO - Implementation
-        throw new NotImplementedException();
-    }
-
-    /**
-     * Alter allergen.
-     *
-     * @param oldName the old name
-     * @param newName the new name (if not changed, use the same as oldName)
-     */
-    public void alterAllergen(String oldName, String newName) {
-        // TODO - Implementation
-        throw new NotImplementedException();
-    }
-
-    /**
-     * Gets allergen by name.
+     * Gets allergen by name from the database.
      *
      * @param name the name
      * @return the allergen by name
      */
-    public Product getAllergenByName(String name) {
-        // TODO - Implementation
-        throw new NotImplementedException();
+    public Allergen getAllergenByName(String name) {
+        return (Allergen) getItemByName("Allergen", name);
     }
 
+    /**
+     * Gets all allergens from the database.
+     *
+     * @return the allergens
+     */
+    public Collection<Allergen> getAllergens() {
+        GenericDao.startTransaction();
+        Collection<Allergen> allergens = allergenRepo.findAll();
+        GenericDao.commitTransaction();
+        return allergens;
+    }
+
+    // Tries to insertItem the item (depending on the kind of item), rolls back if an exception is thrown.
+    private void insertItem(Object item) {
+        try {
+            GenericDao.startTransaction();
+            if (item instanceof Product)
+                productRepo.insert((Product) item);
+            if (item instanceof Ingredient)
+                ingredientRepo.insert((Ingredient) item);
+            GenericDao.commitTransaction();
+        } catch (Exception e) {
+            GenericDao.rollbackTransaction();
+            throw e;
+        }
+    }
+
+    // Tries to updateItem an item (depending on the kind of item), rolls back if an exception is thrown.
+    private void updateItem(String oldName, Object item) {
+        try {
+            GenericDao.startTransaction();
+            if (item instanceof Product)
+                productRepo.update((Product) item, oldName);
+            if (item instanceof Ingredient)
+                ingredientRepo.update((Ingredient) item, oldName);
+            GenericDao.commitTransaction();
+        } catch (Exception e) {
+            GenericDao.rollbackTransaction();
+            throw e;
+        }
+    }
+
+    // Tries to get an item by name (depending on the kind of item), rolls back if an exception is thrown.
+    private Object getItemByName(String type, String name) {
+        Object item = new Object();
+        try {
+            GenericDao.startTransaction();
+            switch (type) {
+                case "Product":
+                    item = productRepo.getProductByName(name);
+                    break;
+                case "Ingredient":
+                    item = ingredientRepo.getIngredientByName(name);
+                    break;
+                case "Allergen":
+                    item = allergenRepo.getAllergenByName(name);
+                    break;
+            }
+            GenericDao.commitTransaction();
+            return item;
+        } catch (Exception e) {
+            GenericDao.rollbackTransaction();
+            throw e;
+        }
+    }
+
+    // Tries to delete an item (depending on the kind of item), rolls back if an exception is thrown.
+    private void deleteItem(Object item) {
+        try {
+            GenericDao.startTransaction();
+            if (item instanceof Product)
+                productRepo.delete((Product) item);
+            if (item instanceof Ingredient)
+                ingredientRepo.delete((Ingredient) item);
+            GenericDao.commitTransaction();
+        } catch (Exception e) {
+            GenericDao.rollbackTransaction();
+            throw e;
+        }
+    }
 
 }
