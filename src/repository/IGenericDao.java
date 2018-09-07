@@ -1,6 +1,6 @@
 package repository;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * The interface Generic dao.
@@ -14,7 +14,7 @@ public interface IGenericDao<T> {
      *
      * @return list with all objects
      */
-    List<T> findAll();
+    Collection<T> findAll();
 
     /**
      * Gets object.

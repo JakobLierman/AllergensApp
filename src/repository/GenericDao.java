@@ -2,7 +2,7 @@ package repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.util.List;
+import java.util.Collection;
 
 public class GenericDao<T> implements IGenericDao<T> {
     private static final EntityManagerFactory emf = util.JPAUtil.getEntityManagerFactory();
@@ -31,7 +31,7 @@ public class GenericDao<T> implements IGenericDao<T> {
     }
 
     @Override
-    public List<T> findAll() {
+    public Collection<T> findAll() {
         return em.createQuery("select entity from " + type.getName() + " entity", type).getResultList();
     }
 

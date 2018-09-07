@@ -66,10 +66,10 @@ public class Ingredient {
     /**
      * Sets allergen.
      *
-     * @param allergens the allergen
+     * @param allergen the allergen
      */
-    public void setAllergens(Allergen allergens) {
-        this.allergen = allergens;
+    public void setAllergen(Allergen allergen) {
+        this.allergen = allergen;
     }
 
     /**

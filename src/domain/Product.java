@@ -47,8 +47,6 @@ public class Product {
      * @return the name
      */
     public String getName() {
-        if (name.isEmpty())
-            throw new NullPointerException("Name can't be empty.");
         return name;
     }
 
@@ -58,6 +56,8 @@ public class Product {
      * @param name the name
      */
     protected void setName(String name) {
+        if (name.isEmpty())
+            throw new NullPointerException("Name can't be empty.");
         this.name = name;
     }
 
