@@ -1,5 +1,6 @@
 package domain;
 
+import repository.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Set;
@@ -9,10 +10,17 @@ import java.util.Set;
  */
 public class ProductManager {
 
+    private IGenericDao<Product> productRepo;
+    private IGenericDao<Ingredient> ingredientRepo;
+    private IGenericDao<Allergen> allergenRepo;
+
     /**
      * Instantiates a new Product manager.
      */
     public ProductManager() {
+        productRepo = new ProductDao();
+        ingredientRepo = new IngredientDao();
+        allergenRepo = new AllergenDao();
     }
 
     /**
