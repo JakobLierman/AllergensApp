@@ -1,7 +1,5 @@
 package repository;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
@@ -34,37 +32,32 @@ public class GenericDao<T> implements IGenericDao<T> {
 
     @Override
     public List<T> findAll() {
-        //TODO - Implementation
-        throw new NotImplementedException();
+        return em.createQuery("select entity from " + type.getName() + " entity", type).getResultList();
     }
 
     @Override
     public <U> T get(U id) {
-        //TODO - Implementation
-        throw new NotImplementedException();
+        return em.find(type, id);
     }
 
     @Override
     public T update(T object, String oldName) {
-        //TODO - Implementation
-        throw new NotImplementedException();
+        return em.merge(object);
     }
 
     @Override
     public void delete(T object) {
-        //TODO - Implementation
-        throw new NotImplementedException();
+        em.remove(em.merge(object));
     }
 
     @Override
     public void insert(T object) {
-        //TODO - Implementation
-        throw new NotImplementedException();
+        em.persist(object);
     }
 
     @Override
     public <U> boolean exists(U id) {
-        //TODO - Implementation
-        throw new NotImplementedException();
+        T entity = em.find(type, id);
+        return entity != null;
     }
 }
