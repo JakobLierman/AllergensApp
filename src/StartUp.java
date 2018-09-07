@@ -5,7 +5,12 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class StartUp extends Application {
+
+    private static ResourceBundle resourceBundle;
 
     @Override
     public void start(Stage primaryStage) {
@@ -16,7 +21,7 @@ public class StartUp extends Application {
         primaryStage.setScene(scene);
 
         // Set title and show app
-        primaryStage.setTitle("Allergens");
+        primaryStage.setTitle(domainController.getResourceBundle().getString("Title"));
         primaryStage.show();
 
         // Add stylesheets and fonts
@@ -31,6 +36,15 @@ public class StartUp extends Application {
     }
 
     public static void main(String[] args) {
+        // Set language
+        Locale locale;
+        if (args.length < 1)
+            locale = Locale.getDefault();
+        else
+            locale = new Locale(args[0]);
+        resourceBundle = ResourceBundle.getBundle("Bundle.properties", locale);
+
+        // Start GUI
         Application.launch(StartUp.class, args);
     }
 
