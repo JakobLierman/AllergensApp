@@ -1,3 +1,4 @@
+import domain.DomainController;
 import domain.ProductManager;
 import gui.HomeScreen;
 import javafx.application.Application;
@@ -8,9 +9,10 @@ public class StartUp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ProductManager productManager = new ProductManager();
+        // DomainController creation
+        DomainController domainController = new DomainController(new ProductManager(), resourceBundle);
         // Set initial scene
-        Scene scene = new Scene(new HomeScreen<>(productManager, "Product"));
+        Scene scene = new Scene(new HomeScreen<>(domainController, "Product"));
         primaryStage.setScene(scene);
 
         // Set title and show app
