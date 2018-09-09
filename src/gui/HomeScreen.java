@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import domain.DomainController;
 import domain.ProductManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +45,40 @@ public class HomeScreen extends AnchorPane {
 
         this.domainController = domainController;
         this.productManager = domainController.getProductManager();
+
+        fillList(type);
+        setText(type);
+    }
+
+    // Fills list according to type
+    private void fillList(String type) {
+        ObservableList<Object> list = FXCollections.observableArrayList();
+        switch (type) {
+            case "Ingredient":
+                list.addAll(productManager.getIngredients());
+                break;
+            case "Allergen":
+                list.addAll(productManager.getAllergens());
+                break;
+            default:
+                list.addAll(productManager.getProducts());
+        }
+        lvItemList.setItems(list);
+    }
+
+    // Sets all text items according to type
+    private void setText(String type) {
+        switch (type) {
+            case "Ingredient":
+                // TODO - Text
+                break;
+            case "Allergen":
+                // TODO - Text
+                break;
+            default:
+                // TODO - Text
+                break;
+        }
     }
 
     @FXML
