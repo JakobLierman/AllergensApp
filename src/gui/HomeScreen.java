@@ -88,17 +88,47 @@ public class HomeScreen extends AnchorPane {
 
     @FXML
     void handleAddItem(ActionEvent event) {
-        // TODO - Implement
+        switch (this.type) {
+            case "Ingredient":
+                // TODO - Implement
+                break;
+            case "Allergen":
+                // TODO - Implement
+                break;
+            default:
+                // TODO - Implement
+                break;
+        }
     }
 
     @FXML
     void handleAlterItem(ActionEvent event) {
-        // TODO - Implement
+        switch (this.type) {
+            case "Ingredient":
+                // TODO - Implement
+                break;
+            case "Allergen":
+                // TODO - Implement
+                break;
+            default:
+                // TODO - Implement
+                break;
+        }
     }
 
     @FXML
     void handleDeleteItem(ActionEvent event) {
-        // TODO - Implement
+        switch (this.type) {
+            case "Ingredient":
+                // TODO - Implement
+                break;
+            case "Allergen":
+                // TODO - Implement
+                break;
+            default:
+                // TODO - Implement
+                break;
+        }
     }
 
     @FXML
