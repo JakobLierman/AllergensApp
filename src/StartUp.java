@@ -37,12 +37,10 @@ public class StartUp extends Application {
 
     public static void main(String[] args) {
         // Set language
-        Locale locale;
-        if (args.length < 1)
-            locale = Locale.getDefault();
+        if (args.length == 0)
+            resourceBundle = ResourceBundle.getBundle("Bundle");
         else
-            locale = new Locale(args[0]);
-        resourceBundle = ResourceBundle.getBundle("Bundle.properties", locale);
+            resourceBundle = ResourceBundle.getBundle("Bundle", new Locale(args[0]));
 
         // Start GUI
         Application.launch(StartUp.class, args);
