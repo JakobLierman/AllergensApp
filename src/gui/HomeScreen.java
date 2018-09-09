@@ -18,6 +18,7 @@ public class HomeScreen extends AnchorPane {
 
     private final DomainController domainController;
     private final ProductManager productManager;
+    private String type;
     @FXML
     private Text txtTitle;
     @FXML
@@ -45,15 +46,16 @@ public class HomeScreen extends AnchorPane {
 
         this.domainController = domainController;
         this.productManager = domainController.getProductManager();
+        this.type = type;
 
-        fillList(type);
-        setText(type);
+        fillList();
+        setText();
     }
 
     // Fills list according to type
-    private void fillList(String type) {
+    private void fillList() {
         ObservableList<Object> list = FXCollections.observableArrayList();
-        switch (type) {
+        switch (this.type) {
             case "Ingredient":
                 list.addAll(productManager.getIngredients());
                 break;
@@ -67,16 +69,19 @@ public class HomeScreen extends AnchorPane {
     }
 
     // Sets all text items according to type
-    private void setText(String type) {
-        switch (type) {
+    private void setText() {
+        switch (this.type) {
             case "Ingredient":
                 // TODO - Text
+                txtTitle.setText(domainController.getText("Ingredients"));
                 break;
             case "Allergen":
                 // TODO - Text
+                txtTitle.setText(domainController.getText("Allergens"));
                 break;
             default:
                 // TODO - Text
+                txtTitle.setText(domainController.getText("Products"));
                 break;
         }
     }
