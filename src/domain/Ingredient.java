@@ -81,4 +81,8 @@ public class Ingredient {
         return this.allergen == null;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

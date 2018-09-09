@@ -112,4 +112,9 @@ public class Product {
         });
         return allergens;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
