@@ -18,7 +18,7 @@ public class ProductManager {
     /**
      * Instantiates a new Product manager.
      */
-    public ProductManager() {
+    ProductManager() {
         productRepo = new ProductDao();
         ingredientRepo = new IngredientDao();
         allergenRepo = new AllergenDao();

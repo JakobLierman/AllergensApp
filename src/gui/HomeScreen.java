@@ -12,19 +12,18 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class HomeScreen<T> extends AnchorPane {
+public class HomeScreen extends AnchorPane {
 
     private final DomainController domainController;
     private final ProductManager productManager;
-    private String type;
     @FXML
     private Text txtTitle;
     @FXML
-    private JFXListView<T> lvItemList;
-    @FXML
-    private JFXButton btnItem3;
+    private JFXListView<Object> lvItemList;
     @FXML
     private JFXButton btnItem2;
+    @FXML
+    private JFXButton btnItem3;
     @FXML
     private JFXButton btnAdd;
     @FXML
@@ -41,6 +40,9 @@ public class HomeScreen<T> extends AnchorPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+
+        this.domainController = domainController;
+        this.productManager = domainController.getProductManager();
     }
 
     @FXML

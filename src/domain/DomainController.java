@@ -6,8 +6,8 @@ public class DomainController {
     private final ProductManager productManager;
     private final ResourceBundle resourceBundle;
 
-    public DomainController(final ProductManager productManager, final ResourceBundle resourceBundle) {
-        this.productManager = productManager;
+    public DomainController(final ResourceBundle resourceBundle) {
+        this.productManager = new ProductManager();
         this.resourceBundle = resourceBundle;
     }
 
