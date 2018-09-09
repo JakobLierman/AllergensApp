@@ -15,7 +15,7 @@ public class DomainController {
         return productManager;
     }
 
-    public ResourceBundle getResourceBundle() {
-        return resourceBundle;
+    public String getText(String textToGet) {
+        return resourceBundle.getString(textToGet);
     }
 }
