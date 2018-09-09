@@ -98,11 +98,27 @@ public class HomeScreen extends AnchorPane {
 
     @FXML
     void handleItem2(ActionEvent event) {
-        // TODO - Implement
+        if (this.type.equals("Product")) {
+            this.type = "Ingredient";
+            fillList();
+            setText();
+        } else {
+            this.type = "Product";
+            fillList();
+            setText();
+        }
     }
 
     @FXML
     void handleItem3(ActionEvent event) {
-        // TODO - Implement
+        if (this.type.equals("Allergen")) {
+            this.type = "Ingredient";
+            fillList();
+            setText();
+        } else {
+            this.type = "Allergen";
+            fillList();
+            setText();
+        }
     }
 }
