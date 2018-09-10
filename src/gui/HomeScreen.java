@@ -56,8 +56,16 @@ public class HomeScreen extends AnchorPane {
         this.productManager = domainController.getProductManager();
         this.type = type;
 
+        checkButtonStage();
         fillList();
         setText();
+    }
+
+    // Checks if buttons need to be enabled or disabled according to the type
+    private void checkButtonStage() {
+        btnAdd.setDisable(this.type.equalsIgnoreCase("Allergen"));
+        btnAlter.setDisable(this.type.equalsIgnoreCase("Allergen"));
+        btnDelete.setDisable(this.type.equalsIgnoreCase("Allergen"));
     }
 
     // Fills list according to type
@@ -160,10 +168,12 @@ public class HomeScreen extends AnchorPane {
     void handleItem2(ActionEvent event) {
         if (this.type.equals("Product")) {
             this.type = "Ingredient";
+            checkButtonStage();
             fillList();
             setText();
         } else {
             this.type = "Product";
+            checkButtonStage();
             fillList();
             setText();
         }
@@ -173,10 +183,12 @@ public class HomeScreen extends AnchorPane {
     void handleItem3(ActionEvent event) {
         if (this.type.equals("Allergen")) {
             this.type = "Ingredient";
+            checkButtonStage();
             fillList();
             setText();
         } else {
             this.type = "Allergen";
+            checkButtonStage();
             fillList();
             setText();
         }
