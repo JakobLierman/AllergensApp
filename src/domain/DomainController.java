@@ -1,10 +1,11 @@
 package domain;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class DomainController {
     private final ProductManager productManager;
-    private final ResourceBundle resourceBundle;
+    private ResourceBundle resourceBundle;
 
     public DomainController(final ResourceBundle resourceBundle) {
         this.productManager = new ProductManager();
@@ -17,5 +18,9 @@ public class DomainController {
 
     public String getText(String textToGet) {
         return resourceBundle.getString(textToGet);
+    }
+
+    public void changeLanguage(String language) {
+        this.resourceBundle = ResourceBundle.getBundle("Bundle", new Locale(language));
     }
 }

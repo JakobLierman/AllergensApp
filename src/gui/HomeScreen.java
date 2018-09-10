@@ -2,6 +2,7 @@ package gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXRadioButton;
 import domain.DomainController;
 import domain.ProductManager;
 import javafx.collections.FXCollections;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -33,6 +35,12 @@ public class HomeScreen extends AnchorPane {
     private JFXButton btnAlter;
     @FXML
     private JFXButton btnDelete;
+    @FXML
+    private JFXRadioButton toggleEnglish;
+    @FXML
+    private JFXRadioButton toggleDutch;
+    @FXML
+    private ToggleGroup languageGroup;
 
     public HomeScreen(final DomainController domainController, String type) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
@@ -84,6 +92,16 @@ public class HomeScreen extends AnchorPane {
                 txtTitle.setText(domainController.getText("Products"));
                 break;
         }
+    }
+
+    // Changes language on toggle change
+    @FXML
+    void handleLanguageChange(ActionEvent event) {
+        if (toggleEnglish.isSelected())
+            domainController.changeLanguage("en");
+        else
+            domainController.changeLanguage("nl");
+        setText();
     }
 
     @FXML
