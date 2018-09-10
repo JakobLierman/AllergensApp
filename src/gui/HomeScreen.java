@@ -78,18 +78,25 @@ public class HomeScreen extends AnchorPane {
 
     // Sets all text items according to type
     private void setText() {
+        txtTitle.setText(domainController.getText(this.type + "s"));
+        btnAdd.setText(domainController.getText("add" + this.type));
+        btnAlter.setText(domainController.getText("alter" + this.type));
+        btnDelete.setText(domainController.getText("delete" + this.type));
         switch (this.type) {
             case "Ingredient":
                 // TODO - Text
-                txtTitle.setText(domainController.getText("Ingredients"));
+                btnItem2.setText(domainController.getText("Products"));
+                btnItem3.setText(domainController.getText("Allergens"));
                 break;
             case "Allergen":
                 // TODO - Text
-                txtTitle.setText(domainController.getText("Allergens"));
+                btnItem2.setText(domainController.getText("Products"));
+                btnItem3.setText(domainController.getText("Ingredients"));
                 break;
             default:
                 // TODO - Text
-                txtTitle.setText(domainController.getText("Products"));
+                btnItem2.setText(domainController.getText("Ingredients"));
+                btnItem3.setText(domainController.getText("Allergens"));
                 break;
         }
     }
