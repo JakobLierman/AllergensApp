@@ -15,7 +15,8 @@ public class Ingredient {
     @Basic
     @Column(name = "name", nullable = false)
     private String name;
-    @javax.persistence.ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "Allergenid", referencedColumnName = "id")
     private Allergen allergen;
 
     public Ingredient() {

@@ -19,8 +19,14 @@ public class Product {
     private String name;
     @Basic
     private String description;
-    @OneToMany
-    @JoinColumn(name = "product_id")
+    @ManyToMany
+    @JoinTable(
+            name = "Product_Ingredient",
+            joinColumns = {
+                    @JoinColumn(name = "Productid", nullable = false, referencedColumnName = "id")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "Ingredientid", nullable = false, referencedColumnName = "id")}
+    )
     private Set<Ingredient> ingredients;
 
     public Product() {
