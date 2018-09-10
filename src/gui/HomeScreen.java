@@ -16,6 +16,9 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
+/**
+ * The type Home screen.
+ */
 public class HomeScreen extends AnchorPane {
 
     private final DomainController domainController;
@@ -42,6 +45,12 @@ public class HomeScreen extends AnchorPane {
     @FXML
     private ToggleGroup languageGroup;
 
+    /**
+     * Instantiates a new Home screen.
+     *
+     * @param domainController the domain controller
+     * @param type             the type (e.g. "Product")
+     */
     public HomeScreen(final DomainController domainController, String type) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
         loader.setRoot(this);
@@ -109,7 +118,11 @@ public class HomeScreen extends AnchorPane {
         }
     }
 
-    // Changes language on toggle change
+    /**
+     * Changes language on toggle change.
+     *
+     * @param event the event
+     */
     @FXML
     void handleLanguageChange(ActionEvent event) {
         if (toggleEnglish.isSelected())
@@ -119,51 +132,71 @@ public class HomeScreen extends AnchorPane {
         setText();
     }
 
+    /**
+     * Opens a new screen in which the user can add an item.
+     *
+     * @param event the event
+     */
     @FXML
     void handleAddItem(ActionEvent event) {
         switch (this.type) {
             case "Ingredient":
-                // TODO - Implement
+                // TODO - Implement add ingredient
                 break;
             case "Allergen":
-                // TODO - Implement
+                // TODO - Implement add allergen
                 break;
             default:
-                // TODO - Implement
+                // TODO - Implement add product
                 break;
         }
     }
 
+    /**
+     * Opens a new screen in which the user can alter an item.
+     *
+     * @param event the event
+     */
     @FXML
     void handleAlterItem(ActionEvent event) {
         switch (this.type) {
             case "Ingredient":
-                // TODO - Implement
+                // TODO - Implement alter ingredient
                 break;
             case "Allergen":
-                // TODO - Implement
+                // TODO - Implement alter allergen
                 break;
             default:
-                // TODO - Implement
+                // TODO - Implement alter product
                 break;
         }
     }
 
+    /**
+     * Deletes the selected item, shows a popup.
+     *
+     * @param event the event
+     */
     @FXML
     void handleDeleteItem(ActionEvent event) {
         switch (this.type) {
             case "Ingredient":
-                // TODO - Implement
+                // TODO - Implement delete ingredient
                 break;
             case "Allergen":
-                // TODO - Implement
+                // TODO - Implement delete allergen
                 break;
             default:
-                // TODO - Implement
+                // TODO - Implement delete product
                 break;
         }
     }
 
+    /**
+     * Changes items to the desired type.
+     *
+     * @param event the event
+     */
     @FXML
     void handleItem2(ActionEvent event) {
         if (this.type.equalsIgnoreCase("Product")) {
@@ -179,6 +212,11 @@ public class HomeScreen extends AnchorPane {
         }
     }
 
+    /**
+     * Changes items to the desired type.
+     *
+     * @param event the event
+     */
     @FXML
     void handleItem3(ActionEvent event) {
         if (this.type.equalsIgnoreCase("Allergen")) {
