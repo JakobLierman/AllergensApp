@@ -166,7 +166,7 @@ public class HomeScreen extends AnchorPane {
 
     @FXML
     void handleItem2(ActionEvent event) {
-        if (this.type.equals("Product")) {
+        if (this.type.equalsIgnoreCase("Product")) {
             this.type = "Ingredient";
             checkButtonStage();
             fillList();
@@ -181,7 +181,7 @@ public class HomeScreen extends AnchorPane {
 
     @FXML
     void handleItem3(ActionEvent event) {
-        if (this.type.equals("Allergen")) {
+        if (this.type.equalsIgnoreCase("Allergen")) {
             this.type = "Ingredient";
             checkButtonStage();
             fillList();
