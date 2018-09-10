@@ -72,9 +72,9 @@ public class HomeScreen extends AnchorPane {
 
     // Checks if buttons need to be enabled or disabled according to the type
     private void checkButtonStage() {
-        btnAdd.setDisable(this.type.equalsIgnoreCase("Allergen"));
-        btnAlter.setDisable(this.type.equalsIgnoreCase("Allergen"));
-        btnDelete.setDisable(this.type.equalsIgnoreCase("Allergen"));
+        btnAdd.setVisible(!this.type.equalsIgnoreCase("Allergen"));
+        btnAlter.setVisible(!this.type.equalsIgnoreCase("Allergen"));
+        btnDelete.setVisible(!this.type.equalsIgnoreCase("Allergen"));
     }
 
     // Fills list according to type
@@ -101,17 +101,14 @@ public class HomeScreen extends AnchorPane {
         btnDelete.setText(domainController.getText("delete" + this.type));
         switch (this.type) {
             case "Ingredient":
-                // TODO - Text
                 btnItem2.setText(domainController.getText("Products"));
                 btnItem3.setText(domainController.getText("Allergens"));
                 break;
             case "Allergen":
-                // TODO - Text
                 btnItem2.setText(domainController.getText("Products"));
                 btnItem3.setText(domainController.getText("Ingredients"));
                 break;
             default:
-                // TODO - Text
                 btnItem2.setText(domainController.getText("Ingredients"));
                 btnItem3.setText(domainController.getText("Allergens"));
                 break;
