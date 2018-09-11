@@ -24,6 +24,9 @@ public class Allergen {
     @Transient
     private BufferedImage icon;
 
+    /**
+     * Instantiates a new Allergen.
+     */
     public Allergen() {
     }
 

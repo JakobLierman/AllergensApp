@@ -31,6 +31,9 @@ public class Product {
     )
     private Set<Ingredient> ingredients;
 
+    /**
+     * Instantiates a new Product.
+     */
     public Product() {
     }
 

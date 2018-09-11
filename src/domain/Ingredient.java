@@ -21,6 +21,9 @@ public class Ingredient {
     @JoinColumn(name = "Allergenid", referencedColumnName = "id")
     private Allergen allergen;
 
+    /**
+     * Instantiates a new Ingredient.
+     */
     public Ingredient() {
     }
 
