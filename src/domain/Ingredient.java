@@ -1,5 +1,7 @@
 package domain;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.persistence.*;
 
 /**
@@ -82,8 +84,25 @@ public class Ingredient {
         return allergen != null;
     }
 
-    @Override
-    public String toString() {
-        return this.name;
+    /**
+     * Name property simple string property.
+     *
+     * @return the simple string property
+     */
+    public SimpleStringProperty nameProperty() {
+        return new SimpleStringProperty(name);
+    }
+
+    /**
+     * Allergen property simple string property.
+     *
+     * @return the simple string property
+     */
+    public SimpleStringProperty allergenProperty() {
+        SimpleStringProperty allergenProperty = new SimpleStringProperty();
+        if (hasAllergen())
+            allergenProperty.set(allergen.getName());
+        return allergenProperty;
+
     }
 }

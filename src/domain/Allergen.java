@@ -1,5 +1,7 @@
 package domain;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.persistence.*;
 
 /**
@@ -53,5 +55,13 @@ public class Allergen {
     @Override
     public String toString() {
         return this.name;
+
+    /**
+     * Name property simple string property.
+     *
+     * @return the simple string property
+     */
+    public SimpleStringProperty nameProperty() {
+        return new SimpleStringProperty(name);
     }
 }

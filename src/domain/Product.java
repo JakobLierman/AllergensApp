@@ -1,5 +1,7 @@
 package domain;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -119,8 +121,36 @@ public class Product {
         return allergens;
     }
 
-    @Override
-    public String toString() {
-        return this.name;
+    /**
+     * Name property simple string property.
+     *
+     * @return the simple string property
+     */
+    public SimpleStringProperty nameProperty() {
+        return new SimpleStringProperty(name);
+    }
+
+    /**
+     * Description property simple string property.
+     *
+     * @return the simple string property
+     */
+    public SimpleStringProperty descriptionProperty() {
+        return new SimpleStringProperty(description);
+    }
+
+    /**
+     * Allergens property simple string property.
+     *
+     * @return the simple string property
+     */
+    public SimpleStringProperty allergensProperty() {
+        StringBuilder stringBuilder = new StringBuilder();
+        getAllergens().forEach(allergen -> {
+            stringBuilder.append(allergen.getName()).append(", ");
+        });
+        if (stringBuilder.length() > 0)
+            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+        return new SimpleStringProperty(stringBuilder.toString());
     }
 }
