@@ -16,7 +16,7 @@ public class DomainController {
      * @param resourceBundle the initial resource bundle
      */
     public DomainController(final ResourceBundle resourceBundle) {
-        this.productManager = new ProductManager();
+        productManager = new ProductManager();
         this.resourceBundle = resourceBundle;
     }
 
@@ -45,6 +45,15 @@ public class DomainController {
      * @param language the language symbols (e.g. "en")
      */
     public void changeLanguage(String language) {
-        this.resourceBundle = ResourceBundle.getBundle("Bundle", new Locale(language));
+        resourceBundle = ResourceBundle.getBundle("Bundle", new Locale(language));
+    }
+
+    /**
+     * Gets language.
+     *
+     * @return the language
+     */
+    public String getLanguage() {
+        return resourceBundle.getLocale().getLanguage();
     }
 }

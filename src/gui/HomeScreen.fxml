@@ -56,7 +56,7 @@
       </HBox>
       <HBox layoutY="503.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <children>
-            <JFXRadioButton fx:id="toggleEnglish" onAction="#handleLanguageChange" selected="true" style="-jfx-selected-color: #1565c0;" text="English">
+            <JFXRadioButton fx:id="toggleEnglish" onAction="#handleLanguageChange" style="-jfx-selected-color: #1565c0;" text="English">
                <font>
                   <Font name="Roboto" size="14.0" />
                </font>

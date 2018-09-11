@@ -78,8 +78,8 @@ public class Ingredient {
      *
      * @return the boolean
      */
-    public boolean HasAllergen() {
-        return this.allergen == null;
+    public boolean hasAllergen() {
+        return allergen != null;
     }
 
     @Override

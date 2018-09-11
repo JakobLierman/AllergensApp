@@ -112,8 +112,8 @@ public class Product {
      */
     public Set<Allergen> getAllergens() {
         Set<Allergen> allergens = new HashSet<>();
-        this.ingredients.forEach(ingredient -> {
-            if (ingredient.HasAllergen())
+        ingredients.forEach(ingredient -> {
+            if (ingredient.hasAllergen())
                 allergens.add(ingredient.getAllergen());
         });
         return allergens;

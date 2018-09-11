@@ -62,8 +62,13 @@ public class HomeScreen extends AnchorPane {
         }
 
         this.domainController = domainController;
-        this.productManager = domainController.getProductManager();
+        productManager = domainController.getProductManager();
         this.type = type;
+
+        if (domainController.getLanguage().equals("en"))
+            toggleEnglish.setSelected(true);
+        else
+            toggleDutch.setSelected(true);
 
         checkButtonStage();
         fillList();
@@ -72,9 +77,9 @@ public class HomeScreen extends AnchorPane {
 
     // Checks if buttons need to be enabled or disabled according to the type
     private void checkButtonStage() {
-        btnAdd.setVisible(!this.type.equalsIgnoreCase("Allergen"));
-        btnAlter.setVisible(!this.type.equalsIgnoreCase("Allergen"));
-        btnDelete.setVisible(!this.type.equalsIgnoreCase("Allergen"));
+        btnAdd.setVisible(!type.equalsIgnoreCase("Allergen"));
+        btnAlter.setVisible(!type.equalsIgnoreCase("Allergen"));
+        btnDelete.setVisible(!type.equalsIgnoreCase("Allergen"));
     }
 
     // Fills list according to type
@@ -95,11 +100,12 @@ public class HomeScreen extends AnchorPane {
 
     // Sets all text items according to type
     private void setText() {
-        txtTitle.setText(domainController.getText(this.type + "s"));
-        btnAdd.setText(domainController.getText("add" + this.type));
-        btnAlter.setText(domainController.getText("alter" + this.type));
-        btnDelete.setText(domainController.getText("delete" + this.type));
-        switch (this.type) {
+        txtTitle.setText(domainController.getText(type + "s"));
+        btnAdd.setText(domainController.getText("add" + type));
+        btnAlter.setText(domainController.getText("alter" + type));
+        btnDelete.setText(domainController.getText("delete" + type));
+
+        switch (type) {
             case "Ingredient":
                 btnItem2.setText(domainController.getText("Products"));
                 btnItem3.setText(domainController.getText("Allergens"));
@@ -176,7 +182,7 @@ public class HomeScreen extends AnchorPane {
      */
     @FXML
     void handleDeleteItem(ActionEvent event) {
-        switch (this.type) {
+        switch (type) {
             case "Ingredient":
                 // TODO - Implement delete ingredient
                 break;
@@ -216,13 +222,13 @@ public class HomeScreen extends AnchorPane {
      */
     @FXML
     void handleItem3(ActionEvent event) {
-        if (this.type.equalsIgnoreCase("Allergen")) {
-            this.type = "Ingredient";
+        if (type.equalsIgnoreCase("Allergen")) {
+            type = "Ingredient";
             checkButtonStage();
             fillList();
             setText();
         } else {
-            this.type = "Allergen";
+            type = "Allergen";
             checkButtonStage();
             fillList();
             setText();
