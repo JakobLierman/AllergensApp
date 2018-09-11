@@ -1,19 +1,25 @@
 package gui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXRadioButton;
-import domain.DomainController;
-import domain.ProductManager;
+import domain.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
@@ -27,7 +33,13 @@ public class HomeScreen extends AnchorPane {
     @FXML
     private Text txtTitle;
     @FXML
-    private JFXListView<Object> lvItemList;
+    private TableView tableItems;
+    @FXML
+    private TableColumn col1;
+    @FXML
+    private TableColumn col2;
+    @FXML
+    private TableColumn col3;
     @FXML
     private JFXButton btnItem2;
     @FXML
@@ -71,7 +83,7 @@ public class HomeScreen extends AnchorPane {
             toggleDutch.setSelected(true);
 
         checkButtonStage();
-        fillList();
+        fillTable();
         setText();
     }
 
@@ -83,19 +95,32 @@ public class HomeScreen extends AnchorPane {
     }
 
     // Fills list according to type
-    private void fillList() {
-        ObservableList<Object> list = FXCollections.observableArrayList();
-        switch (this.type) {
+    private void fillTable() {
+        ObservableList<Object> items = FXCollections.observableArrayList();
+        col2.setVisible(false);
+        switch (type) {
             case "Ingredient":
-                list.addAll(productManager.getIngredients());
+                items.addAll(productManager.getIngredients());
+
+                col1.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
+                col3.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("allergen"));
                 break;
             case "Allergen":
-                list.addAll(productManager.getAllergens());
+                items.addAll(productManager.getAllergens());
+
+                col1.setCellValueFactory(new PropertyValueFactory<Allergen, String>("name"));
+                col3.setCellValueFactory(new PropertyValueFactory<Allergen, BufferedImage>("icon"));
                 break;
             default:
-                list.addAll(productManager.getProducts());
+                items.addAll(productManager.getProducts());
+
+                col1.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+                col2.setVisible(true);
+                col2.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));
+                col3.setCellValueFactory(new PropertyValueFactory<Product, String>("allergens"));
+                break;
         }
-        lvItemList.setItems(list);
+        tableItems.setItems(items);
     }
 
     // Sets all text items according to type
@@ -105,20 +130,30 @@ public class HomeScreen extends AnchorPane {
         btnAlter.setText(domainController.getText("alter" + type));
         btnDelete.setText(domainController.getText("delete" + type));
 
+        col1.setText(domainController.getText("Name"));
+        col2.setText(domainController.getText("Description"));
+
         switch (type) {
             case "Ingredient":
                 btnItem2.setText(domainController.getText("Products"));
                 btnItem3.setText(domainController.getText("Allergens"));
+
+                col3.setText(domainController.getText("Allergen"));
                 break;
             case "Allergen":
                 btnItem2.setText(domainController.getText("Products"));
                 btnItem3.setText(domainController.getText("Ingredients"));
+
+                col3.setText(domainController.getText("Icon"));
                 break;
             default:
                 btnItem2.setText(domainController.getText("Ingredients"));
                 btnItem3.setText(domainController.getText("Allergens"));
+
+                col3.setText(domainController.getText("Allergens"));
                 break;
         }
+        tableItems.setPlaceholder(new Label(domainController.getText("noItems")));
     }
 
     /**
@@ -202,15 +237,15 @@ public class HomeScreen extends AnchorPane {
      */
     @FXML
     void handleItem2(ActionEvent event) {
-        if (this.type.equalsIgnoreCase("Product")) {
-            this.type = "Ingredient";
+        if (type.equalsIgnoreCase("Product")) {
+            type = "Ingredient";
             checkButtonStage();
-            fillList();
+            fillTable();
             setText();
         } else {
-            this.type = "Product";
+            type = "Product";
             checkButtonStage();
-            fillList();
+            fillTable();
             setText();
         }
     }
@@ -225,12 +260,12 @@ public class HomeScreen extends AnchorPane {
         if (type.equalsIgnoreCase("Allergen")) {
             type = "Ingredient";
             checkButtonStage();
-            fillList();
+            fillTable();
             setText();
         } else {
             type = "Allergen";
             checkButtonStage();
-            fillList();
+            fillTable();
             setText();
         }
     }
