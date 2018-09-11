@@ -177,17 +177,17 @@ public class HomeScreen extends AnchorPane {
      */
     @FXML
     void handleAddItem(ActionEvent event) {
-        switch (this.type) {
-            case "Ingredient":
-                // TODO - Implement add ingredient
-                break;
-            case "Allergen":
-                // TODO - Implement add allergen
-                break;
-            default:
-                // TODO - Implement add product
-                break;
+        Stage newStage = new Stage();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        if (type.equals("Product")) {
+            newStage.setTitle(domainController.getText("addProduct"));
+            newStage.setScene(new Scene(new DetailScreen(domainController, new Product())));
+        } else {
+            newStage.setTitle(domainController.getText("addIngredient"));
+            newStage.setScene(new Scene(new DetailScreen(domainController, new Ingredient())));
         }
+        newStage.showAndWait();
+        fillTable();
     }
 
     /**
@@ -197,17 +197,18 @@ public class HomeScreen extends AnchorPane {
      */
     @FXML
     void handleAlterItem(ActionEvent event) {
-        switch (this.type) {
-            case "Ingredient":
-                // TODO - Implement alter ingredient
-                break;
-            case "Allergen":
-                // TODO - Implement alter allergen
-                break;
-            default:
-                // TODO - Implement alter product
-                break;
+        Stage newStage = new Stage();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        if (type.equals("Product")) {
+            newStage.setTitle(domainController.getText("alterProduct"));
+            newStage.setScene(new Scene(new DetailScreen(domainController, tableItems.getSelectionModel().getSelectedItem())));
+        } else {
+            newStage.setTitle(domainController.getText("alterIngredient"));
+            newStage.setScene(new Scene(new DetailScreen(domainController, tableItems.getSelectionModel().getSelectedItem())));
         }
+        newStage.showAndWait();
+        fillTable();
+        // TODO - Test this
     }
 
     /**
