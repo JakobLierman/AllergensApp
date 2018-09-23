@@ -18,7 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.PopupMessage;
 
+import javax.xml.registry.DeleteException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -187,6 +189,7 @@ public class HomeScreen extends AnchorPane {
             newStage.setScene(new Scene(new DetailScreen(domainController, new Ingredient())));
         }
         newStage.showAndWait();
+        // Refreshes the table
         fillTable();
     }
 
@@ -207,6 +210,7 @@ public class HomeScreen extends AnchorPane {
             newStage.setScene(new Scene(new DetailScreen(domainController, tableItems.getSelectionModel().getSelectedItem())));
         }
         newStage.showAndWait();
+        // Refreshes the table
         fillTable();
         // TODO - Test this
     }
@@ -218,17 +222,42 @@ public class HomeScreen extends AnchorPane {
      */
     @FXML
     void handleDeleteItem(ActionEvent event) {
-        switch (type) {
-            case "Ingredient":
-                // TODO - Implement delete ingredient
-                break;
-            case "Allergen":
-                // TODO - Implement delete allergen
-                break;
-            default:
-                // TODO - Implement delete product
-                break;
+        String title;
+        String headerText;
+        String contentText;
+        if (tableItems.getSelectionModel().isEmpty()) {
+            title = domainController.getText("Oops");
+            headerText = domainController.getText("Wrong");
+            contentText = domainController.getText("nothingSelected");
+            PopupMessage.showWarningMessage(title, headerText, contentText);
+        } else {
+            String yesText = domainController.getText("Yes");
+            String noText = domainController.getText("No");
+            headerText = domainController.getText("areYouSure");
+            contentText = domainController.getText("noUndo");
+            if (type.equals("Product")) {
+                title = domainController.getText("deleteProduct");
+                if (PopupMessage.showConfirmationMessage(title, headerText, contentText, yesText, noText)) {
+                    productManager.removeProduct((Product) tableItems.getSelectionModel().getSelectedItem());
+                }
+
+            } else {
+                try {
+                    title = domainController.getText("deleteIngredient");
+                    if (PopupMessage.showConfirmationMessage(title, headerText, contentText, yesText, noText)) {
+                        productManager.removeIngredient((Ingredient) tableItems.getSelectionModel().getSelectedItem());
+                    }
+                } catch (DeleteException e) {
+                    title = domainController.getText("Oops");
+                    headerText = domainController.getText("Wrong");
+                    contentText = domainController.getText("cannotDelete");
+                    PopupMessage.showErrorMessage(title, headerText, contentText);
+                }
+            }
+            // Refreshes the table
+            fillTable();
         }
+        // TODO - Test this
     }
 
     /**
