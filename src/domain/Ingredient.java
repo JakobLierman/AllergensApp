@@ -8,6 +8,7 @@ import javax.persistence.*;
  * The type Ingredient.
  */
 @Entity
+@NamedQuery(name = "Ingredient.findByName", query = "SELECT i FROM Ingredient i WHERE i.name = :ingredientName")
 public class Ingredient {
 
     @Id

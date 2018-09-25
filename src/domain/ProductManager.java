@@ -2,6 +2,7 @@ package domain;
 
 import repository.*;
 
+import javax.naming.NameAlreadyBoundException;
 import javax.xml.registry.DeleteException;
 import java.util.Collection;
 import java.util.Set;
@@ -31,7 +32,7 @@ public class ProductManager {
      * @param description the description (can be null)
      * @param ingredients the ingredients
      */
-    public void createProduct(String name, String description, Set<Ingredient> ingredients) {
+    public void createProduct(String name, String description, Set<Ingredient> ingredients) throws NameAlreadyBoundException {
         Product product = new Product(name.trim(), ingredients);
         if (!description.isEmpty()) {
             product.setDescription(description);
@@ -44,7 +45,7 @@ public class ProductManager {
      *
      * @param product the product
      */
-    public void duplicateProduct(Product product) {
+    public void duplicateProduct(Product product) throws NameAlreadyBoundException {
         Product duplicate = new Product();
         duplicate.setName(product.getName() + "_copy");
         duplicate.setIngredients(product.getIngredients());
@@ -70,11 +71,12 @@ public class ProductManager {
      * @param ingredients the ingredients
      * @param description the description
      */
-    public void alterProduct(String oldName, String newName, Set<Ingredient> ingredients, String description) {
+    public void alterProduct(String oldName, String newName, String description, Set<Ingredient> ingredients) {
         Product product = getProductByName(oldName);
         product.setName(newName.trim());
+        if (!description.isEmpty())
+            product.setDescription(description);
         product.setIngredients(ingredients);
-        product.setDescription(description);
         updateItem(oldName, product);
     }
 
@@ -106,7 +108,7 @@ public class ProductManager {
      * @param name     the name
      * @param allergen the allergen
      */
-    public void createIngredient(String name, Allergen allergen) {
+    public void createIngredient(String name, Allergen allergen) throws NameAlreadyBoundException {
         Ingredient ingredient = new Ingredient(name, allergen);
         insertItem(ingredient);
     }
@@ -116,7 +118,7 @@ public class ProductManager {
      *
      * @param ingredient the ingredient
      */
-    public void duplicateIngredient(Ingredient ingredient) {
+    public void duplicateIngredient(Ingredient ingredient) throws NameAlreadyBoundException {
         Ingredient duplicate = new Ingredient();
         duplicate.setName(ingredient.getName() + "_copy");
         duplicate.setAllergen(ingredient.getAllergen());
@@ -196,7 +198,7 @@ public class ProductManager {
     }
 
     // Tries to insertItem the item (depending on the kind of item), rolls back if an exception is thrown.
-    private void insertItem(Object item) {
+    private void insertItem(Object item) throws NameAlreadyBoundException {
         try {
             GenericDao.startTransaction();
             if (item instanceof Product)

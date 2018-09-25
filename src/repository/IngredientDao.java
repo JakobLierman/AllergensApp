@@ -2,8 +2,11 @@ package repository;
 
 import domain.Ingredient;
 
+import javax.naming.NameAlreadyBoundException;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IngredientDao extends GenericDao<Ingredient> implements IIngredientDao {
     public IngredientDao() {
@@ -19,5 +22,22 @@ public class IngredientDao extends GenericDao<Ingredient> implements IIngredient
         } catch (NoResultException e) {
             throw new EntityNotFoundException();
         }
+    }
+
+    @Override
+    public void insert(Ingredient ingredient) throws NameAlreadyBoundException {
+        for (String name : getNames())
+            if (name.equalsIgnoreCase(ingredient.getName()))
+                // TODO - Translate
+                throw new NameAlreadyBoundException("An ingredient with the name /'" + ingredient.getName() + "/' already exists");
+        em.persist(ingredient);
+    }
+
+    public List<String> getNames() {
+        List<String> names = new ArrayList<>();
+        for (Ingredient i : findAll()) {
+            names.add(i.getName());
+        }
+        return names;
     }
 }

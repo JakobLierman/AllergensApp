@@ -1,5 +1,6 @@
 package repository;
 
+import javax.naming.NameAlreadyBoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.Collection;
@@ -51,7 +52,7 @@ public class GenericDao<T> implements IGenericDao<T> {
     }
 
     @Override
-    public void insert(T object) {
+    public void insert(T object) throws NameAlreadyBoundException {
         em.persist(object);
     }
 

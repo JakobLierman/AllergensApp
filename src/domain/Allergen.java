@@ -12,6 +12,7 @@ import java.io.IOException;
  * The type Allergen.
  */
 @Entity
+@NamedQuery(name = "Allergen.findByName", query = "SELECT a FROM Allergen a WHERE a.name = :allergenName")
 public class Allergen {
 
     @Id

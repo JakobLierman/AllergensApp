@@ -10,6 +10,7 @@ import java.util.Set;
  * The type Product.
  */
 @Entity
+@NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :productName")
 public class Product {
 
     @Id

@@ -1,5 +1,6 @@
 package repository;
 
+import javax.naming.NameAlreadyBoundException;
 import java.util.Collection;
 
 /**
@@ -46,7 +47,7 @@ public interface IGenericDao<T> {
      *
      * @param object the object
      */
-    void insert(T object);
+    void insert(T object) throws NameAlreadyBoundException;
 
     /**
      * Return if object exists.
