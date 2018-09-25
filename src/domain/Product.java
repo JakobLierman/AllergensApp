@@ -45,9 +45,11 @@ public class Product {
      */
     public Product(String name, Set<Ingredient> ingredients) {
         if (name.isEmpty())
+            // TODO - Language
             throw new NullPointerException("Name can't be empty.");
         this.name = name;
         if (ingredients.isEmpty())
+            // TODO - Language
             throw new NullPointerException("A product must contain ingredients.");
         this.ingredients = ingredients;
     }
@@ -68,6 +70,7 @@ public class Product {
      */
     protected void setName(String name) {
         if (name.isEmpty())
+            // TODO - Language
             throw new NullPointerException("Name can't be empty.");
         this.name = name;
     }

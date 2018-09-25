@@ -3,9 +3,7 @@ package gui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
-import domain.DomainController;
-import domain.Product;
-import domain.ProductManager;
+import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +59,7 @@ public class DetailScreen extends AnchorPane {
 
         fillList();
         setText();
+        fillFields(this.item);
     }
 
     // Fills list according to type
@@ -73,7 +72,6 @@ public class DetailScreen extends AnchorPane {
     }
 
     // Sets all text items according to type
-    // Also fills fields if given item isn't new
     private void setText() {
         btnSave.setText(domainController.getText("Save"));
         btnCancel.setText(domainController.getText("Cancel"));
@@ -87,6 +85,11 @@ public class DetailScreen extends AnchorPane {
             tfName.setPromptText(domainController.getText("nameOf") + " " + domainController.getText("Ingredient").toLowerCase());
             txtTableTitle.setText(domainController.getText("Allergens"));
         }
+    }
+
+    // Fills fields if given item isn't new
+    private void fillFields(Object item) {
+        // TODO - Implement
     }
 
     /**

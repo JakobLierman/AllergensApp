@@ -128,9 +128,11 @@ public class HomeScreen extends AnchorPane {
     // Sets all text items according to type
     private void setText() {
         txtTitle.setText(domainController.getText(type + "s"));
-        btnAdd.setText(domainController.getText("add" + type));
-        btnAlter.setText(domainController.getText("alter" + type));
-        btnDelete.setText(domainController.getText("delete" + type));
+        if (!type.equals("Allergen")) {
+            btnAdd.setText(domainController.getText("add" + type));
+            btnAlter.setText(domainController.getText("alter" + type));
+            btnDelete.setText(domainController.getText("delete" + type));
+        }
 
         col1.setText(domainController.getText("Name"));
         col2.setText(domainController.getText("Description"));
@@ -146,7 +148,7 @@ public class HomeScreen extends AnchorPane {
                 btnItem2.setText(domainController.getText("Products"));
                 btnItem3.setText(domainController.getText("Ingredients"));
 
-                col3.setText(domainController.getText("Icon"));
+                col3.setText(domainController.getText("Icons"));
                 break;
             default:
                 btnItem2.setText(domainController.getText("Ingredients"));

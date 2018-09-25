@@ -35,6 +35,7 @@ public class Ingredient {
      */
     public Ingredient(String name, Allergen allergen) {
         if (name.isEmpty())
+            // TODO - Language
             throw new NullPointerException("Name can't be empty.");
         this.name = name;
         this.allergen = allergen;
@@ -56,6 +57,7 @@ public class Ingredient {
      */
     public void setName(String name) {
         if (name.isEmpty())
+            // TODO - Language
             throw new NullPointerException("Name can't be empty.");
         this.name = name;
     }
