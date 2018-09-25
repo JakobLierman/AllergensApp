@@ -29,6 +29,8 @@ public class DetailScreen extends AnchorPane {
     @FXML
     private JFXTextField tfName;
     @FXML
+    private Text txtTableTitle;
+    @FXML
     private JFXListView<Object> lvSelectableItems;
     @FXML
     private JFXButton btnSave;
@@ -54,7 +56,7 @@ public class DetailScreen extends AnchorPane {
         }
 
         this.domainController = domainController;
-        this.productManager = domainController.getProductManager();
+        productManager = domainController.getProductManager();
         this.item = item;
 
         fillList();
@@ -73,12 +75,17 @@ public class DetailScreen extends AnchorPane {
     // Sets all text items according to type
     // Also fills fields if given item isn't new
     private void setText() {
+        btnSave.setText(domainController.getText("Save"));
+        btnCancel.setText(domainController.getText("Cancel"));
+        txtSelectMultiple.setText(domainController.getText("selectMultiple"));
         if (item instanceof Product) {
-            // TODO - Implement
-            // Fills fields
+            txtTitle.setText(domainController.getText("addProduct"));
+            tfName.setPromptText(domainController.getText("nameOf") + " " + domainController.getText("Product").toLowerCase());
+            txtTableTitle.setText(domainController.getText("Ingredients"));
         } else {
-            // TODO - Implement
-            // Fills fields
+            txtTitle.setText(domainController.getText("addIngredient"));
+            tfName.setPromptText(domainController.getText("nameOf") + " " + domainController.getText("Ingredient").toLowerCase());
+            txtTableTitle.setText(domainController.getText("Allergens"));
         }
     }
 
@@ -89,7 +96,7 @@ public class DetailScreen extends AnchorPane {
      */
     @FXML
     void handleCancel(ActionEvent event) {
-        stage = (Stage) this.getScene().getWindow();
+        stage = (Stage) getScene().getWindow();
         stage.close();
     }
 
