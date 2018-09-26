@@ -26,6 +26,7 @@ public class Ingredient {
      * Instantiates a new Ingredient.
      */
     public Ingredient() {
+        name = "";
     }
 
     /**
@@ -110,5 +111,10 @@ public class Ingredient {
             allergenProperty.set(allergen.getName());
         return allergenProperty;
 
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

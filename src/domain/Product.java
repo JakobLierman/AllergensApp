@@ -36,6 +36,7 @@ public class Product {
      * Instantiates a new Product.
      */
     public Product() {
+        name = "";
     }
 
     /**
@@ -109,8 +110,10 @@ public class Product {
      * @param ingredients the ingredients
      */
     protected void setIngredients(Set<Ingredient> ingredients) {
-        if (ingredients.isEmpty())
-            throw new NullPointerException("A product must contain ingredients.");
+        // TODO - Uncomment
+        //if (ingredients.isEmpty())
+        //    // TODO - Language
+        //    throw new NullPointerException("A product must contain ingredients.");
         this.ingredients = ingredients;
     }
 
@@ -159,5 +162,10 @@ public class Product {
         if (stringBuilder.length() > 0)
             stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
         return new SimpleStringProperty(stringBuilder.toString());
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

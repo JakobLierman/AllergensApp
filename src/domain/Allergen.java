@@ -176,4 +176,9 @@ public class Allergen {
     public SimpleStringProperty nameProperty() {
         return new SimpleStringProperty(name);
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
