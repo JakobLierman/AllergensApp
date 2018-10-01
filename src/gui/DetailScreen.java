@@ -97,11 +97,17 @@ public class DetailScreen extends AnchorPane {
         txtSelectMultiple.setText(domainController.getText("selectMultiple"));
         tfDescription.setPromptText(domainController.getText("Description"));
         if (item instanceof Product) {
-            txtTitle.setText(domainController.getText("addProduct"));
+            if (((Product) item).getName().isEmpty())
+                txtTitle.setText(domainController.getText("addProduct"));
+            else
+                txtTitle.setText(domainController.getText("alterProduct"));
             tfName.setPromptText(domainController.getText("nameOf") + " " + domainController.getText("Product").toLowerCase());
             txtTableTitle.setText(domainController.getText("Ingredients"));
         } else {
-            txtTitle.setText(domainController.getText("addIngredient"));
+            if (((Ingredient) item).getName().isEmpty())
+                txtTitle.setText(domainController.getText("addIngredient"));
+            else
+                txtTitle.setText(domainController.getText("alterIngredient"));
             tfName.setPromptText(domainController.getText("nameOf") + " " + domainController.getText("Ingredient").toLowerCase());
             txtTableTitle.setText(domainController.getText("Allergens"));
         }
