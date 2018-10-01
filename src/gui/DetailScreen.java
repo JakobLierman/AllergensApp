@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.PopupMessage;
 
+import javax.naming.NameAlreadyBoundException;
 import java.io.IOException;
 import java.util.Set;
 
@@ -154,7 +155,7 @@ public class DetailScreen extends AnchorPane {
                 else
                     productManager.alterIngredient(((Ingredient) item).getName(), tfName.getText(), (Allergen) lvSelectableItems.getSelectionModel().getSelectedItem());
             }
-        } catch (Exception e) {
+        } catch (NullPointerException | NameAlreadyBoundException e) {
             PopupMessage.showErrorMessage(
                     domainController.getText("Oops"),
                     domainController.getText("Wrong"),

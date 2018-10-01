@@ -87,7 +87,7 @@ public class ProductManager {
      * @return the product by name
      */
     public Product getProductByName(String name) {
-        return (Product) getItemByName("product", name);
+        return (Product) getItemByName("Product", name);
     }
 
     /**

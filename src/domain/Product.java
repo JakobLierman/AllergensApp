@@ -110,10 +110,9 @@ public class Product {
      * @param ingredients the ingredients
      */
     protected void setIngredients(Set<Ingredient> ingredients) {
-        // TODO - Uncomment
-        //if (ingredients.isEmpty())
-        //    // TODO - Language
-        //    throw new NullPointerException("A product must contain ingredients.");
+        if (ingredients.isEmpty())
+            // TODO - Language
+            throw new NullPointerException("A product must contain ingredients.");
         this.ingredients = ingredients;
     }
 
