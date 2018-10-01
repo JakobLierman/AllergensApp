@@ -120,12 +120,20 @@ public class DetailScreen extends AnchorPane {
                 tfName.setText(((Product) item).getName());
                 if (!((Product) item).getDescription().isEmpty())
                     tfDescription.setText(((Product) item).getDescription());
-                // TODO - Select ingredients
+                // Selects ingredients
+                lvSelectableItems.getItems()
+                        .stream()
+                        .filter(i -> ((Product) item).getIngredients().contains(i))
+                        .forEach(i -> lvSelectableItems.getSelectionModel().select(i));
             }
         } else {
             if (!((Ingredient) item).getName().isEmpty()) {
                 tfName.setText(((Ingredient) item).getName());
-                // TODO - Select allergen
+                // Selects allergen
+                lvSelectableItems.getItems()
+                        .stream()
+                        .filter(i -> ((Ingredient) item).getAllergen().equals(i))
+                        .forEach(i -> lvSelectableItems.getSelectionModel().select(i));
             }
         }
     }
