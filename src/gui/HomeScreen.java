@@ -87,6 +87,8 @@ public class HomeScreen extends AnchorPane {
         checkButtonStage();
         fillTable();
         setText();
+        // Bind button to items in list
+        btnAlter.disableProperty().bind(tableItems.getSelectionModel().selectedItemProperty().isNull());
     }
 
     // Checks if buttons need to be enabled or disabled according to the type
