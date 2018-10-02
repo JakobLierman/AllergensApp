@@ -3,6 +3,7 @@ package gui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import domain.*;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,6 +54,14 @@ public class HomeScreen extends AnchorPane {
     private JFXButton btnAlter;
     @FXML
     private JFXButton btnDelete;
+    @FXML
+    private JFXButton btnExport;
+    @FXML
+    private JFXButton btnExportAll;
+    @FXML
+    private HBox exportButtons;
+    @FXML
+    private HBox crudButtons;
     @FXML
     private JFXRadioButton toggleEnglish;
     @FXML
@@ -92,8 +102,13 @@ public class HomeScreen extends AnchorPane {
         checkButtonStage();
         fillTable();
         setText();
-        // Bind button to items in list
+
+        // Bindings
         btnAlter.disableProperty().bind(tableItems.getSelectionModel().selectedItemProperty().isNull());
+        exportButtons.visibleProperty().bind(Bindings.createBooleanBinding(() ->
+                type.equalsIgnoreCase("Product")));
+        crudButtons.visibleProperty().bind(Bindings.createBooleanBinding(() ->
+                !type.equalsIgnoreCase("Allergen")));
     }
 
     // Checks if buttons need to be enabled or disabled according to the type
@@ -135,6 +150,7 @@ public class HomeScreen extends AnchorPane {
     // Sets all text items according to type
     private void setText() {
         txtTitle.setText(domainController.getText(type + "s"));
+
         if (!type.equals("Allergen")) {
             btnAdd.setText(domainController.getText("add" + type));
             btnAlter.setText(domainController.getText("alter" + type));
@@ -164,6 +180,10 @@ public class HomeScreen extends AnchorPane {
                 col3.setText(domainController.getText("Allergens"));
                 break;
         }
+
+        btnExport.setText(domainController.getText("ExportSelected"));
+        btnExportAll.setText(domainController.getText("ExportAll"));
+
         tableItems.setPlaceholder(new Label(domainController.getText("noItems")));
     }
 
@@ -307,5 +327,10 @@ public class HomeScreen extends AnchorPane {
             fillTable();
             setText();
         }
+    }
+
+    @FXML
+    void handleExport(ActionEvent event) {
+        // TODO - Implement handleExport
     }
 }
