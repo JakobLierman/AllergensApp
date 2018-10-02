@@ -66,6 +66,10 @@ public class DetailScreen extends AnchorPane {
         productManager = domainController.getProductManager();
         this.item = item;
 
+        initialize();
+    }
+
+    private void initialize() {
         // Sets selectionmode and disables/enables description textarea according to type
         if (item instanceof Product) {
             lvSelectableItems.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -77,7 +81,7 @@ public class DetailScreen extends AnchorPane {
 
         fillList();
         setText();
-        fillFields(this.item);
+        fillFields(item);
     }
 
     // Fills list according to type

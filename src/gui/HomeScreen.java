@@ -79,6 +79,11 @@ public class HomeScreen extends AnchorPane {
         productManager = domainController.getProductManager();
         this.type = type;
 
+        initialize();
+    }
+
+    private void initialize() {
+        // Select correct language
         if (domainController.getLanguage().equals("en"))
             toggleEnglish.setSelected(true);
         else
