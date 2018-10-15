@@ -1,7 +1,6 @@
 package gui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXRadioButton;
 import domain.*;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -9,11 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -25,15 +24,19 @@ import util.PopupMessage;
 import javax.xml.registry.DeleteException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * The type Home screen.
  */
-public class HomeScreen extends AnchorPane {
+public class HomeScreenContent extends AnchorPane implements Initializable {
 
+    private Stage stage;
     private final DomainController domainController;
     private final ProductManager productManager;
     private String type;
+
     @FXML
     private Text txtTitle;
     @FXML
@@ -55,19 +58,7 @@ public class HomeScreen extends AnchorPane {
     @FXML
     private JFXButton btnDelete;
     @FXML
-    private JFXButton btnExport;
-    @FXML
-    private JFXButton btnExportAll;
-    @FXML
-    private HBox exportButtons;
-    @FXML
     private HBox crudButtons;
-    @FXML
-    private JFXRadioButton toggleEnglish;
-    @FXML
-    private JFXRadioButton toggleDutch;
-    @FXML
-    private ToggleGroup languageGroup;
 
     /**
      * Instantiates a new Home screen.
@@ -75,8 +66,12 @@ public class HomeScreen extends AnchorPane {
      * @param domainController the domain controller
      * @param type             the type (e.g. "Product")
      */
-    public HomeScreen(final DomainController domainController, String type) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+    public HomeScreenContent(final DomainController domainController, String type) {
+        this.domainController = domainController;
+        productManager = domainController.getProductManager();
+        this.type = type;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreenContent.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -84,20 +79,16 @@ public class HomeScreen extends AnchorPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
-        this.domainController = domainController;
-        productManager = domainController.getProductManager();
-        this.type = type;
-
-        initialize();
+        // loader.setResources(ResourceBundle.getBundle("Bundle", new Locale("en")));
     }
 
-    private void initialize() {
-        // Select correct language
-        if (domainController.getLanguage().equals("en"))
-            toggleEnglish.setSelected(true);
-        else
-            toggleDutch.setSelected(true);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Add buttons to AnchorPane
+        getChildren().add(0, new HomeScreenButtons(domainController, type));
+        setTopAnchor(getChildren().get(0), 90.0);
+        setLeftAnchor(getChildren().get(0), 0.0);
+        setBottomAnchor(getChildren().get(0), 20.0);
 
         checkButtonStage();
         fillTable();
@@ -105,13 +96,12 @@ public class HomeScreen extends AnchorPane {
 
         // Bindings
         btnAlter.disableProperty().bind(tableItems.getSelectionModel().selectedItemProperty().isNull());
-        exportButtons.visibleProperty().bind(Bindings.createBooleanBinding(() ->
-                type.equalsIgnoreCase("Product")));
+        System.out.println(tableItems.getProperties().toString());
         crudButtons.visibleProperty().bind(Bindings.createBooleanBinding(() ->
                 !type.equalsIgnoreCase("Allergen")));
     }
 
-    // Checks if buttons need to be enabled or disabled according to the type
+    // Checks if crudButtons need to be enabled or disabled according to the type
     private void checkButtonStage() {
         btnAdd.setVisible(!type.equalsIgnoreCase("Allergen"));
         btnAlter.setVisible(!type.equalsIgnoreCase("Allergen"));
@@ -181,24 +171,7 @@ public class HomeScreen extends AnchorPane {
                 break;
         }
 
-        btnExport.setText(domainController.getText("ExportSelected"));
-        btnExportAll.setText(domainController.getText("ExportAll"));
-
         tableItems.setPlaceholder(new Label(domainController.getText("noItems")));
-    }
-
-    /**
-     * Changes language on toggle change.
-     *
-     * @param event the event
-     */
-    @FXML
-    void handleLanguageChange(ActionEvent event) {
-        if (toggleEnglish.isSelected())
-            domainController.changeLanguage("en");
-        else
-            domainController.changeLanguage("nl");
-        setText();
     }
 
     /**
@@ -327,10 +300,5 @@ public class HomeScreen extends AnchorPane {
             fillTable();
             setText();
         }
-    }
-
-    @FXML
-    void handleExport(ActionEvent event) {
-        // TODO - Implement handleExport
     }
 }
