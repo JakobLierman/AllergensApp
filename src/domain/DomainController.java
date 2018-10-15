@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.Locale;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 public class DomainController {
     private final ProductManager productManager;
     private ResourceBundle resourceBundle;
+    private PDFCreator pdf;
 
     /**
      * Instantiates a new Domain controller.
@@ -18,6 +19,7 @@ public class DomainController {
     public DomainController(final ResourceBundle resourceBundle) {
         productManager = new ProductManager();
         this.resourceBundle = resourceBundle;
+        pdf = new PDFCreator();
     }
 
     /**
