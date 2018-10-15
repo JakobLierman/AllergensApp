@@ -39,21 +39,25 @@ public class DomainController {
         return resourceBundle.getString(textToGet);
     }
 
-    /**
-     * Changes the resource bundle to the desired language.
-     *
-     * @param language the language symbols (e.g. "en")
-     */
-    public void changeLanguage(String language) {
-        resourceBundle = ResourceBundle.getBundle("Bundle", new Locale(language));
-    }
+//     /**
+//      * Changes the resource bundle to the desired language.
+//      *
+//      * @param language the language symbols (e.g. "en")
+//      */
+//     public void changeLanguage(String language) {
+//         resourceBundle = ResourceBundle.getBundle("Bundle", new Locale(language));
+//     }
 
-    /**
-     * Gets language.
-     *
-     * @return the language
-     */
-    public String getLanguage() {
-        return resourceBundle.getLocale().getLanguage();
+//    /**
+//     * Gets language.
+//     *
+//     * @return the language
+//     */
+//    public String getLanguage() {
+//        return resourceBundle.getLocale().getLanguage();
+//    }
+
+    public void export(List<Product> items, String directory) {
+        // TODO - Implement
     }
 }
