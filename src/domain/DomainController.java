@@ -1,5 +1,7 @@
 package domain;
 
+import io.reactivex.Observable;
+
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -10,6 +12,7 @@ public class DomainController {
     private final ProductManager productManager;
     private ResourceBundle resourceBundle;
     private PDFCreator pdf;
+    private String type;
 
     /**
      * Instantiates a new Domain controller.
@@ -20,6 +23,8 @@ public class DomainController {
         productManager = new ProductManager();
         this.resourceBundle = resourceBundle;
         pdf = new PDFCreator();
+        // Sets initial type
+        type = "Product";
     }
 
     /**
@@ -41,6 +46,18 @@ public class DomainController {
         return resourceBundle.getString(textToGet);
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Observable<String> getType() {
+        return Observable.just(type);
+    }
+
+    public void export(List<Product> items, String directory) {
+        // TODO - Implement
+    }
+
 //     /**
 //      * Changes the resource bundle to the desired language.
 //      *
@@ -58,8 +75,4 @@ public class DomainController {
 //    public String getLanguage() {
 //        return resourceBundle.getLocale().getLanguage();
 //    }
-
-    public void export(List<Product> items, String directory) {
-        // TODO - Implement
-    }
 }

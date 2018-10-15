@@ -64,12 +64,11 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
      * Instantiates a new Home screen.
      *
      * @param domainController the domain controller
-     * @param type             the type (e.g. "Product")
      */
-    public HomeScreenContent(final DomainController domainController, String type) {
+    public HomeScreenContent(final DomainController domainController) {
         this.domainController = domainController;
         productManager = domainController.getProductManager();
-        this.type = type;
+        domainController.getType().subscribe(type -> this.type = type);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreenContent.fxml"));
         loader.setRoot(this);
@@ -85,7 +84,7 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Add buttons to AnchorPane
-        getChildren().add(0, new HomeScreenButtons(domainController, type));
+        getChildren().add(0, new HomeScreenButtons(domainController));
         setTopAnchor(getChildren().get(0), 90.0);
         setLeftAnchor(getChildren().get(0), 0.0);
         setBottomAnchor(getChildren().get(0), 20.0);

@@ -16,7 +16,7 @@ public class StartUp extends Application {
         // DomainController creation
         DomainController domainController = new DomainController(resourceBundle);
         // Set initial scene
-        Scene scene = new Scene(new HomeScreenContent(domainController, "Product"));
+        Scene scene = new Scene(new HomeScreenContent(domainController));
         primaryStage.setScene(scene);
 
         // Set title and show app
