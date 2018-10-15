@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -18,12 +19,14 @@ import util.PopupMessage;
 
 import javax.naming.NameAlreadyBoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
  * The type Detail screen.
  */
-public class DetailScreen extends AnchorPane {
+public class DetailScreen extends AnchorPane implements Initializable {
 
     private Stage stage;
     private final DomainController domainController;
@@ -53,6 +56,10 @@ public class DetailScreen extends AnchorPane {
      * @param item             the item (can be an empty new item)
      */
     public DetailScreen(final DomainController domainController, Object item) {
+        this.domainController = domainController;
+        productManager = domainController.getProductManager();
+        this.item = item;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailScreen.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -61,16 +68,12 @@ public class DetailScreen extends AnchorPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
-        this.domainController = domainController;
-        productManager = domainController.getProductManager();
-        this.item = item;
-
-        initialize();
+        // loader.setResources(ResourceBundle.getBundle("Bundle", new Locale("en")));
     }
 
-    private void initialize() {
-        // Sets selectionmode and disables/enables description textarea according to type
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Sets SelectionMode and disables/enables description textarea according to type
         if (item instanceof Product) {
             lvSelectableItems.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             tfDescription.setDisable(false);
