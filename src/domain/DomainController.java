@@ -1,6 +1,7 @@
 package domain;
 
-import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,7 +13,7 @@ public class DomainController {
     private final ProductManager productManager;
     private ResourceBundle resourceBundle;
     private PDFCreator pdf;
-    private String type;
+    private Subject<String> typeObservable = PublishSubject.create();
 
     /**
      * Instantiates a new Domain controller.
@@ -24,7 +25,7 @@ public class DomainController {
         this.resourceBundle = resourceBundle;
         pdf = new PDFCreator();
         // Sets initial type
-        type = "Product";
+        setType("Product");
     }
 
     /**
@@ -46,12 +47,22 @@ public class DomainController {
         return resourceBundle.getString(textToGet);
     }
 
+    /**
+     * Sets type.
+     *
+     * @param type the type
+     */
     public void setType(String type) {
-        this.type = type;
+        typeObservable.onNext(type);
     }
 
-    public Observable<String> getType() {
-        return Observable.just(type);
+    /**
+     * Gets type observable.
+     *
+     * @return the type observable
+     */
+    public Subject<String> getTypeObservable() {
+        return typeObservable;
     }
 
     public void export(List<Product> items, String directory) {

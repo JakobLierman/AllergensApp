@@ -2,7 +2,6 @@ package gui;
 
 import com.jfoenix.controls.JFXButton;
 import domain.*;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -68,7 +67,6 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
     public HomeScreenContent(final DomainController domainController) {
         this.domainController = domainController;
         productManager = domainController.getProductManager();
-        domainController.getType().subscribe(type -> this.type = type);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreenContent.fxml"));
         loader.setRoot(this);
@@ -89,15 +87,19 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
         setLeftAnchor(getChildren().get(0), 0.0);
         setBottomAnchor(getChildren().get(0), 20.0);
 
-        checkButtonStage();
-        fillTable();
-        setText();
+        // Execute these methods when type changes
+        domainController.getTypeObservable().subscribe(type -> {
+            this.type = type;
+            checkButtonStage();
+            fillTable();
+            setText();
+        });
 
         // Bindings
         btnAlter.disableProperty().bind(tableItems.getSelectionModel().selectedItemProperty().isNull());
-        System.out.println(tableItems.getProperties().toString());
-        crudButtons.visibleProperty().bind(Bindings.createBooleanBinding(() ->
-                !type.equalsIgnoreCase("Allergen")));
+        //BooleanBinding booleanBinding = Bindings.equal(new SimpleStringProperty(type), "Allergen");
+        //crudButtons.visibleProperty().bind(booleanBinding);
+        //crudButtons.visibleProperty().bind(Bindings.createBooleanBinding(() -> !type.equalsIgnoreCase("Allergen"));
     }
 
     // Checks if crudButtons need to be enabled or disabled according to the type

@@ -43,7 +43,7 @@ public class HomeScreenButtons extends AnchorPane implements Initializable {
 
     public HomeScreenButtons(final DomainController domainController) {
         this.domainController = domainController;
-        domainController.getType().subscribe(type -> this.type = type);
+        domainController.getTypeObservable().subscribe(type -> this.type = type);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreenButtons.fxml"));
         loader.setRoot(this);
