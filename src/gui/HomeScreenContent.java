@@ -47,10 +47,6 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
     @FXML
     private TableColumn col3;
     @FXML
-    private JFXButton btnItem2;
-    @FXML
-    private JFXButton btnItem3;
-    @FXML
     private JFXButton btnAdd;
     @FXML
     private JFXButton btnAlter;
@@ -153,21 +149,12 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
 
         switch (type) {
             case "Ingredient":
-                btnItem2.setText(domainController.getText("Products"));
-                btnItem3.setText(domainController.getText("Allergens"));
-
                 col3.setText(domainController.getText("Allergen"));
                 break;
             case "Allergen":
-                btnItem2.setText(domainController.getText("Products"));
-                btnItem3.setText(domainController.getText("Ingredients"));
-
                 col3.setText(domainController.getText("Icons"));
                 break;
             default:
-                btnItem2.setText(domainController.getText("Ingredients"));
-                btnItem3.setText(domainController.getText("Allergens"));
-
                 col3.setText(domainController.getText("Allergens"));
                 break;
         }
@@ -261,45 +248,5 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
             fillTable();
         }
         // TODO - Test this
-    }
-
-    /**
-     * Changes items to the desired type.
-     *
-     * @param event the event
-     */
-    @FXML
-    void handleItem2(ActionEvent event) {
-        if (type.equalsIgnoreCase("Product")) {
-            type = "Ingredient";
-            checkButtonStage();
-            fillTable();
-            setText();
-        } else {
-            type = "Product";
-            checkButtonStage();
-            fillTable();
-            setText();
-        }
-    }
-
-    /**
-     * Changes items to the desired type.
-     *
-     * @param event the event
-     */
-    @FXML
-    void handleItem3(ActionEvent event) {
-        if (type.equalsIgnoreCase("Allergen")) {
-            type = "Ingredient";
-            checkButtonStage();
-            fillTable();
-            setText();
-        } else {
-            type = "Allergen";
-            checkButtonStage();
-            fillTable();
-            setText();
-        }
     }
 }

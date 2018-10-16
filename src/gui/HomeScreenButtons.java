@@ -100,17 +100,17 @@ public class HomeScreenButtons extends AnchorPane implements Initializable {
 
     @FXML
     void handleItem1(ActionEvent event) {
-        // TODO - Implement
+        domainController.setType("Product");
     }
 
     @FXML
     void handleItem2(ActionEvent event) {
-        // TODO - Implement
+        domainController.setType("Ingredient");
     }
 
     @FXML
     void handleItem3(ActionEvent event) {
-        // TODO - Implement
+        domainController.setType("Allergen");
     }
 
 //    /**

@@ -23,16 +23,6 @@
                 <TableColumn fx:id="col3" editable="false" minWidth="100.0" prefWidth="225.0" sortable="false" text="col3" />
             </columns>
         </TableView>
-        <JFXButton fx:id="btnItem3" layoutX="670.0" layoutY="25.0" onAction="#handleItem3" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #1565c0;" text="Item3" textFill="WHITE" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
-            <font>
-                <Font name="Roboto" size="14.0" />
-            </font>
-        </JFXButton>
-        <JFXButton fx:id="btnItem2" layoutX="561.0" layoutY="25.0" onAction="#handleItem2" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #1565c0;" text="Item2" textFill="WHITE" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="25.0">
-            <font>
-                <Font name="Roboto" size="14.0" />
-            </font>
-        </JFXButton>
         <HBox fx:id="crudButtons" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0">
             <children>
                 <JFXButton fx:id="btnAdd" buttonType="RAISED" layoutX="695.0" layoutY="10.0" onAction="#handleAddItem" prefHeight="30.0" style="-fx-background-color: #1565c0;" text="AddItem" textFill="WHITE">
