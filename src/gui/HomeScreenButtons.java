@@ -18,6 +18,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * The type Home screen buttons.
+ */
 public class HomeScreenButtons extends AnchorPane implements Initializable {
 
     private Stage stage;
@@ -41,6 +44,11 @@ public class HomeScreenButtons extends AnchorPane implements Initializable {
     @FXML
     private JFXButton btnExport;
 
+    /**
+     * Instantiates new Home screen buttons.
+     *
+     * @param domainController the domain controller
+     */
     public HomeScreenButtons(final DomainController domainController) {
         this.domainController = domainController;
         domainController.getTypeObservable().subscribe(type -> this.type = type);
@@ -75,6 +83,12 @@ public class HomeScreenButtons extends AnchorPane implements Initializable {
         btnExport.setText(domainController.getText("Export"));
     }
 
+    /**
+     * Handle export.
+     * Opens a {@link DirectoryChooser} to let you choose where you'd like to save the file.
+     *
+     * @param event the event
+     */
     @FXML
     void handleExport(ActionEvent event) {
         // TODO - Implement handleExport
@@ -98,16 +112,34 @@ public class HomeScreenButtons extends AnchorPane implements Initializable {
         }
     }
 
+    /**
+     * Handle item 1.
+     * Usually goes to Products.
+     *
+     * @param event the event
+     */
     @FXML
     void handleItem1(ActionEvent event) {
         domainController.setType("Product");
     }
 
+    /**
+     * Handle item 2.
+     * Usually goes to Ingredients.
+     *
+     * @param event the event
+     */
     @FXML
     void handleItem2(ActionEvent event) {
         domainController.setType("Ingredient");
     }
 
+    /**
+     * Handle item 3.
+     * Usually goes to Allergens.
+     *
+     * @param event the event
+     */
     @FXML
     void handleItem3(ActionEvent event) {
         domainController.setType("Allergen");

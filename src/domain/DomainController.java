@@ -65,6 +65,12 @@ public class DomainController {
         return typeObservable;
     }
 
+    /**
+     * Export items to pdf in directory.
+     *
+     * @param items     the items
+     * @param directory the directory
+     */
     public void export(List<Product> items, String directory) {
         // TODO - Implement
     }
