@@ -2,7 +2,6 @@ package gui;
 
 import com.jfoenix.controls.JFXButton;
 import domain.DomainController;
-import domain.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,6 @@ import util.PopupMessage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -91,24 +89,18 @@ public class HomeScreenButtons extends AnchorPane implements Initializable {
      */
     @FXML
     void handleExport(ActionEvent event) {
-        // TODO - Implement handleExport
         stage = (Stage) getScene().getWindow();
 
         DirectoryChooser chooser = new DirectoryChooser();
         File file = chooser.showDialog(stage);
 
-        // Get items
-        List<Product> items;
-
-
-        if (file == null) {
-            String title = domainController.getText("Oops");
-            String headerText = domainController.getText("SelectFolder");
-            String contentText = domainController.getText("NoFolderSelected");
-            PopupMessage.showErrorMessage(title, headerText, contentText);
-        } else {
+        if (file != null) {
             String destination = file.getAbsolutePath();
-            //domainController.export(items, destination);
+            domainController.export(destination); // TODO - Try-catch
+
+            // Popup export complete
+            String text = domainController.getText("exportComplete");
+            PopupMessage.showInformationMessage(text, "", text);
         }
     }
 

@@ -3,7 +3,6 @@ package domain;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -66,11 +65,11 @@ public class DomainController {
     /**
      * Export items to pdf in directory.
      *
-     * @param items     the items
      * @param directory the directory
      */
-    public void export(List<Product> items, String directory) {
+    public void export(String directory) {
         // TODO - Implement
+        System.out.println("Exporting to " + directory);
     }
 
 //     /**
