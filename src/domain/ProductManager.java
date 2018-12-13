@@ -71,7 +71,7 @@ public class ProductManager {
      * @param ingredients the ingredients
      * @param description the description
      */
-    public void alterProduct(String oldName, String newName, String description, Set<Ingredient> ingredients) {
+    public void alterProduct(String oldName, String newName, String description, Set<Ingredient> ingredients) throws NameAlreadyBoundException {
         Product product = getProductByName(oldName);
         product.setName(newName.trim());
         if (!description.isEmpty())
@@ -146,7 +146,7 @@ public class ProductManager {
      * @param newName  the new name
      * @param allergen the allergen
      */
-    public void alterIngredient(String oldName, String newName, Allergen allergen) {
+    public void alterIngredient(String oldName, String newName, Allergen allergen) throws NameAlreadyBoundException {
         Ingredient ingredient = getIngredientByName(oldName);
         ingredient.setName(newName.trim());
         ingredient.setAllergen(allergen);
@@ -213,7 +213,7 @@ public class ProductManager {
     }
 
     // Tries to updateItem an item (depending on the kind of item), rolls back if an exception is thrown.
-    private void updateItem(String oldName, Object item) {
+    private void updateItem(String oldName, Object item) throws NameAlreadyBoundException {
         try {
             GenericDao.startTransaction();
             if (item instanceof Product)

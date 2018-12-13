@@ -33,7 +33,7 @@ public interface IGenericDao<T> {
      * @param oldName the old name
      * @return the object
      */
-    T update(T object, String oldName);
+    T update(T object, String oldName) throws NameAlreadyBoundException;
 
     /**
      * Deletes object.

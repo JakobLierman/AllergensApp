@@ -29,8 +29,21 @@ public class ProductDao extends GenericDao<Product> implements IProductDao {
         for (String name : getNames())
             if (name.equalsIgnoreCase(product.getName()))
                 // TODO - Translate
-                throw new NameAlreadyBoundException("A product with the name /'" + product.getName() + "/' already exists");
+                throw new NameAlreadyBoundException("A product with the name '" + product.getName() + "' already exists");
         em.persist(product);
+    }
+
+    @Override
+    public Product update(Product product, String oldName) throws NameAlreadyBoundException {
+        int nameCounter = 0;
+        for (String name : getNames())
+            if (name.equalsIgnoreCase(product.getName())) {
+                nameCounter++;
+                if (nameCounter > 1)
+                    // TODO - Translate
+                    throw new NameAlreadyBoundException("A product with the name '" + product.getName() + "' already exists");
+            }
+        return em.merge(product);
     }
 
     public List<String> getNames() {

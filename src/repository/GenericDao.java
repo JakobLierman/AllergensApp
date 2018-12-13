@@ -42,7 +42,7 @@ public class GenericDao<T> implements IGenericDao<T> {
     }
 
     @Override
-    public T update(T object, String oldName) {
+    public T update(T object, String oldName) throws NameAlreadyBoundException {
         return em.merge(object);
     }
 

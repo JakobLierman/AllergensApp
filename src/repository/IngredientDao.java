@@ -29,8 +29,21 @@ public class IngredientDao extends GenericDao<Ingredient> implements IIngredient
         for (String name : getNames())
             if (name.equalsIgnoreCase(ingredient.getName()))
                 // TODO - Translate
-                throw new NameAlreadyBoundException("An ingredient with the name /'" + ingredient.getName() + "/' already exists");
+                throw new NameAlreadyBoundException("An ingredient with the name '" + ingredient.getName() + "' already exists");
         em.persist(ingredient);
+    }
+
+    @Override
+    public Ingredient update(Ingredient ingredient, String oldName) throws NameAlreadyBoundException {
+        int nameCounter = 0;
+        for (String name : getNames())
+            if (name.equalsIgnoreCase(ingredient.getName())) {
+                nameCounter++;
+                if (nameCounter > 1)
+                    // TODO - Translate
+                    throw new NameAlreadyBoundException("An ingredient with the name '" + ingredient.getName() + "' already exists");
+            }
+        return em.merge(ingredient);
     }
 
     public List<String> getNames() {
