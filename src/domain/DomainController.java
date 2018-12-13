@@ -24,8 +24,6 @@ public class DomainController {
         productManager = new ProductManager();
         this.resourceBundle = resourceBundle;
         pdf = new PDFCreator();
-        // Sets initial type
-        setType("Product");
     }
 
     /**

@@ -15,6 +15,7 @@ public class StartUp extends Application {
     public void start(Stage primaryStage) {
         // DomainController creation
         DomainController domainController = new DomainController(resourceBundle);
+
         // Set initial scene
         Scene scene = new Scene(new HomeScreenContent(domainController));
         primaryStage.setScene(scene);
@@ -22,6 +23,9 @@ public class StartUp extends Application {
         // Set title and show app
         primaryStage.setTitle(domainController.getText("Title"));
         primaryStage.show();
+
+        // Sets initial type
+        domainController.setType("Product");
 
         // Add stylesheets and fonts
         scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Roboto");

@@ -117,6 +117,7 @@ public class DetailScreen extends AnchorPane implements Initializable {
                 txtTitle.setText(domainController.getText("alterIngredient"));
             tfName.setPromptText(domainController.getText("nameOf") + " " + domainController.getText("Ingredient").toLowerCase());
             txtTableTitle.setText(domainController.getText("Allergens"));
+            txtSelectMultiple.setVisible(false);
         }
     }
 
