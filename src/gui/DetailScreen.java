@@ -126,7 +126,7 @@ public class DetailScreen extends AnchorPane implements Initializable {
         if (item instanceof Product) {
             if (!((Product) item).getName().isEmpty()) {
                 tfName.setText(((Product) item).getName());
-                if (!((Product) item).getDescription().isEmpty())
+                if (((Product) item).getDescription() != null && !((Product) item).getDescription().isEmpty())
                     tfDescription.setText(((Product) item).getDescription());
                 // Selects ingredients
                 lvSelectableItems.getItems()

@@ -74,8 +74,7 @@ public class ProductManager {
     public void alterProduct(String oldName, String newName, String description, Set<Ingredient> ingredients) throws NameAlreadyBoundException {
         Product product = getProductByName(oldName);
         product.setName(newName.trim());
-        if (!description.isEmpty())
-            product.setDescription(description);
+        product.setDescription(description);
         product.setIngredients(ingredients);
         updateItem(oldName, product);
     }

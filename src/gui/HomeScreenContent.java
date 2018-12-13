@@ -108,18 +108,19 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
     // Fills list according to type
     private void fillTable() {
         ObservableList<Object> items = FXCollections.observableArrayList();
-        col2.setVisible(false);
         switch (type) {
             case "Ingredient":
                 items.addAll(productManager.getIngredients());
 
                 col1.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
+                col2.setVisible(false);
                 col3.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("allergen"));
                 break;
             case "Allergen":
                 items.addAll(productManager.getAllergens());
 
                 col1.setCellValueFactory(new PropertyValueFactory<Allergen, String>("name"));
+                col2.setVisible(false);
                 col3.setCellValueFactory(new PropertyValueFactory<Allergen, BufferedImage>("icon"));
                 break;
             default:
@@ -201,8 +202,7 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
         }
         newStage.showAndWait();
         // Refreshes the table
-        fillTable();
-        // TODO - Test this
+        tableItems.refresh();
     }
 
     /**
@@ -247,6 +247,5 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
             // Refreshes the table
             fillTable();
         }
-        // TODO - Test this
     }
 }
