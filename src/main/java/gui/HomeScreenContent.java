@@ -64,7 +64,7 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
         this.domainController = domainController;
         productManager = domainController.getProductManager();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreenContent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomeScreenContent.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {

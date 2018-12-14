@@ -46,88 +46,88 @@ public class Allergen {
         String url;
         switch (allergenName) {
             case ("Almond"):
-                url = "/resources/images/almond.png";
+                url = "/images/almond.png";
                 break;
             case ("Amandel"):
-                url = "/resources/images/almond.png";
+                url = "/images/almond.png";
                 break;
             case ("Celery"):
-                url = "/resources/images/celery.png";
+                url = "/images/celery.png";
                 break;
             case ("Selder"):
-                url = "/resources/images/celery.png";
+                url = "/images/celery.png";
                 break;
             case ("Crustaceans"):
-                url = "/resources/images/crustaceans.png";
+                url = "/images/crustaceans.png";
                 break;
             case ("Schaaldieren"):
-                url = "/resources/images/crustaceans.png";
+                url = "/images/crustaceans.png";
                 break;
             case ("Egg"):
-                url = "/resources/images/egg.png";
+                url = "/images/egg.png";
                 break;
             case ("Ei"):
-                url = "/resources/images/egg.png";
+                url = "/images/egg.png";
                 break;
             case ("Fish"):
-                url = "/resources/images/fish.png";
+                url = "/images/fish.png";
                 break;
             case ("Vis"):
-                url = "/resources/images/fish.png";
+                url = "/images/fish.png";
                 break;
             case ("Gluten"):
-                url = "/resources/images/gluten.png";
+                url = "/images/gluten.png";
                 break;
             case ("Lupin"):
-                url = "/resources/images/lupin.png";
+                url = "/images/lupin.png";
                 break;
             case ("Lupine"):
-                url = "/resources/images/lupin.png";
+                url = "/images/lupin.png";
                 break;
             case ("Milk"):
-                url = "/resources/images/milk.png";
+                url = "/images/milk.png";
                 break;
             case ("Melk"):
-                url = "/resources/images/milk.png";
+                url = "/images/milk.png";
                 break;
             case ("Mollusc"):
-                url = "/resources/images/mollusc.png";
+                url = "/images/mollusc.png";
                 break;
             case ("Weekdier"):
-                url = "/resources/images/mollusc.png";
+                url = "/images/mollusc.png";
                 break;
             case ("Mustard"):
-                url = "/resources/images/mustard.png";
+                url = "/images/mustard.png";
                 break;
             case ("Mosterd"):
-                url = "/resources/images/mustard.png";
+                url = "/images/mustard.png";
                 break;
             case ("Peanut"):
-                url = "/resources/images/peanut.png";
+                url = "/images/peanut.png";
                 break;
             case ("Pinda"):
-                url = "/resources/images/peanut.png";
+                url = "/images/peanut.png";
                 break;
             case ("Sesame"):
-                url = "/resources/images/sesame.png";
+                url = "/images/sesame.png";
                 break;
             case ("Sesamzaad"):
-                url = "/resources/images/sesame.png";
+                url = "/images/sesame.png";
                 break;
             case ("Soybean"):
-                url = "/resources/images/soybean.png";
+                url = "/images/soybean.png";
                 break;
             case ("Soja"):
-                url = "/resources/images/soybean.png";
+                url = "/images/soybean.png";
                 break;
             case ("Sulfide"):
-                url = "/resources/images/sulfide.png";
+                url = "/images/sulfide.png";
                 break;
             case ("Sulfiet"):
-                url = "/resources/images/sulfide.png";
+                url = "/images/sulfide.png";
                 break;
             default:
-                url = "/resources/images/notfound.png";
+                url = "/images/notfound.png";
                 break;
         }
         icon = new ImageView(new Image(url, 50, 50, true, true));

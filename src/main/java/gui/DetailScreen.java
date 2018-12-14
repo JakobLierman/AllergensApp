@@ -60,7 +60,7 @@ public class DetailScreen extends AnchorPane implements Initializable {
         productManager = domainController.getProductManager();
         this.item = item;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DetailScreen.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {

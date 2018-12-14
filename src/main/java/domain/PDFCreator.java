@@ -50,7 +50,7 @@ public class PDFCreator {
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
         // Font settings
-        PDFont font = PDTrueTypeFont.loadTTF(document, new File("/resources/font/Roboto/Roboto-Regular.ttf"));
+        PDFont font = PDTrueTypeFont.loadTTF(document, new File("/Roboto/Roboto-Regular.ttf"));
         float fontSize = 12;
         float leading = 1.5f * fontSize;
 
