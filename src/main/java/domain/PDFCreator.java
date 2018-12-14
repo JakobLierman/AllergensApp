@@ -6,7 +6,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class PDFCreator {
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
         // Font settings
-        PDFont font = PDTrueTypeFont.loadTTF(document, new File("/Roboto/Roboto-Regular.ttf"));
+        PDFont font = PDType0Font.load(document, new File("/Roboto/Roboto-Regular.ttf"));
         float fontSize = 12;
         float leading = 1.5f * fontSize;
 
