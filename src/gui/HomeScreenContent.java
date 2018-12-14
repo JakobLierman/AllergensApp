@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -21,7 +22,6 @@ import javafx.stage.Stage;
 import util.PopupMessage;
 
 import javax.xml.registry.DeleteException;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,6 +77,11 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Add icons to allergens
+        for (Allergen allergen : productManager.getAllergens()) {
+            allergen.setIcon(allergen.getName());
+        }
+
         // Add buttons to AnchorPane
         getChildren().add(0, new HomeScreenButtons(domainController));
         setTopAnchor(getChildren().get(0), 90.0);
@@ -111,21 +116,21 @@ public class HomeScreenContent extends AnchorPane implements Initializable {
         switch (type) {
             case "Ingredient":
                 items.addAll(productManager.getIngredients());
-
+                // Column settings
                 col1.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
                 col2.setVisible(false);
                 col3.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("allergen"));
                 break;
             case "Allergen":
                 items.addAll(productManager.getAllergens());
-
+                // Column settings
                 col1.setCellValueFactory(new PropertyValueFactory<Allergen, String>("name"));
                 col2.setVisible(false);
-                col3.setCellValueFactory(new PropertyValueFactory<Allergen, BufferedImage>("icon"));
+                col3.setCellValueFactory(new PropertyValueFactory<Allergen, ImageView>("icon"));
                 break;
             default:
                 items.addAll(productManager.getProducts());
-
+                // Column settings
                 col1.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
                 col2.setVisible(true);
                 col2.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));

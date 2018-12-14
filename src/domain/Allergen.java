@@ -1,12 +1,10 @@
 package domain;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import javax.imageio.ImageIO;
 import javax.persistence.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * The type Allergen.
@@ -23,7 +21,7 @@ public class Allergen {
     @Column(name = "name", nullable = false)
     private String name;
     @Transient
-    private BufferedImage icon;
+    private ImageView icon;
 
     /**
      * Instantiates a new Allergen.
@@ -44,7 +42,7 @@ public class Allergen {
     }
 
     // Sets an icon if one is available
-    private void setIcon(String allergenName) {
+    public void setIcon(String allergenName) {
         String url;
         switch (allergenName) {
             case ("Almond"):
@@ -132,11 +130,7 @@ public class Allergen {
                 url = "/resources/images/notfound.png";
                 break;
         }
-        try {
-            icon = ImageIO.read(new File(url));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        icon = new ImageView(new Image(url, 50, 50, true, true));
     }
 
     /**
@@ -153,7 +147,7 @@ public class Allergen {
      *
      * @param name the name
      */
-    public void setName(String name) {
+    protected void setName(String name) {
         if (name.isEmpty())
             throw new NullPointerException("Name can't be empty.");
         this.name = name;
@@ -164,7 +158,7 @@ public class Allergen {
      *
      * @return the icon
      */
-    public BufferedImage getIcon() {
+    public ImageView getIcon() {
         return icon;
     }
 
@@ -179,6 +173,6 @@ public class Allergen {
 
     @Override
     public String toString() {
-        return this.name;
+        return name;
     }
 }
