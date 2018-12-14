@@ -65,3 +65,5 @@ gradle-app.setting
 \.DS_Store
 
 AllergensApp\.vpdm/
+
+target/
