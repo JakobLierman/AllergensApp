@@ -7,10 +7,10 @@
         <class>domain.Allergen</class>
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost:3306/Allergen"/>
+                      value="jdbc:mariadb://192.168.0.111:3307/Allergen"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="rootroot"/>
+            <property name="javax.persistence.jdbc.user" value="Lierman"/>
+            <property name="javax.persistence.jdbc.password" value="IhShiz43silE1jkS"/>
         </properties>
     </persistence-unit>
 </persistence>
