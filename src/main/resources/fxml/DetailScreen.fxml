@@ -27,7 +27,7 @@
             <Font name="Roboto" size="14.0" />
          </font>
       </Text>
-      <JFXListView fx:id="lvSelectableItems" style="-fx-selection-bar: #0063c6; -fx-selection-bar-non-focused: #5b90fa; -fx-focus-color: #0063c6; -fx-background-radius: 2, 0, 0; -jfx-rippler: WHITE;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="290.0" />
+      <JFXListView fx:id="lvSelectableItems" style="-fx-selection-bar: #0063c6; -fx-selection-bar-non-focused: #5b90fa; -fx-focus-color: #0063c6; -fx-background-radius: 2, 0, 0; -jfx-rippler: WHITE;" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="290.0" />
       <HBox alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <JFXButton fx:id="btnSave" buttonType="RAISED" defaultButton="true" onAction="#handleSave" prefHeight="30.0" style="-fx-background-color: #1565c0;" text="Save" textFill="WHITE">
@@ -48,7 +48,7 @@
             </JFXButton>
          </children>
       </HBox>
-      <Text fx:id="txtSelectMultiple" fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="Ctrl/Cmd+click to select multiple items." AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0">
+      <Text fx:id="txtSelectMultiple" fill="#616161" strokeType="OUTSIDE" strokeWidth="0.0" text="Ctrl/Cmd+click to select multiple items." AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0">
          <font>
             <Font name="Roboto" size="12.0" />
          </font>
@@ -58,5 +58,10 @@
             <Font name="Roboto" size="14.0" />
          </font>
       </JFXTextArea>
+      <JFXButton fx:id="btnAdd" buttonType="RAISED" defaultButton="true" onAction="#handleAddIngredient" prefHeight="30.0" style="-fx-background-color: #00c853;" text="addIngredient" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font name="Roboto" size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </fx:root>

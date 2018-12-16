@@ -11,9 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.PopupMessage;
 
@@ -46,6 +48,8 @@ public class DetailScreen extends AnchorPane implements Initializable {
     private JFXButton btnSave;
     @FXML
     private JFXButton btnCancel;
+    @FXML
+    private JFXButton btnAdd;
     @FXML
     private Text txtSelectMultiple;
 
@@ -110,6 +114,7 @@ public class DetailScreen extends AnchorPane implements Initializable {
                 txtTitle.setText(domainController.getText("alterProduct"));
             tfName.setPromptText(domainController.getText("nameOf") + " " + domainController.getText("Product").toLowerCase());
             txtTableTitle.setText(domainController.getText("Ingredients"));
+            btnAdd.setText(domainController.getText("addIngredient"));
         } else {
             if (((Ingredient) item).getName().isEmpty())
                 txtTitle.setText(domainController.getText("addIngredient"));
@@ -118,6 +123,7 @@ public class DetailScreen extends AnchorPane implements Initializable {
             tfName.setPromptText(domainController.getText("nameOf") + " " + domainController.getText("Ingredient").toLowerCase());
             txtTableTitle.setText(domainController.getText("Allergens"));
             txtSelectMultiple.setVisible(false);
+            btnAdd.setVisible(false);
         }
     }
 
@@ -177,16 +183,31 @@ public class DetailScreen extends AnchorPane implements Initializable {
                 else
                     productManager.alterIngredient(((Ingredient) item).getName(), tfName.getText(), (Allergen) lvSelectableItems.getSelectionModel().getSelectedItem());
             }
+
+            // Close window
+            stage = (Stage) getScene().getWindow();
+            stage.close();
         } catch (NullPointerException | NameAlreadyBoundException e) {
             PopupMessage.showErrorMessage(
                     domainController.getText("Oops"),
                     domainController.getText("Wrong"),
                     e.getMessage());
         }
-
-        // Close window
-        stage = (Stage) getScene().getWindow();
-        stage.close();
     }
 
+    /**
+     * Opens a new screen in which the user can add an ingredient.
+     *
+     * @param event the event
+     */
+    @FXML
+    void handleAddIngredient(ActionEvent event) {
+        Stage newStage = new Stage();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setTitle(domainController.getText("addIngredient"));
+        newStage.setScene(new Scene(new DetailScreen(domainController, new Ingredient())));
+        newStage.showAndWait();
+        // Refreshes the list
+        fillList();
+    }
 }
