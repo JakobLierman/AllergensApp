@@ -14,6 +14,7 @@ public class DomainController {
     private ResourceBundle resourceBundle;
     private PDFCreator pdf;
     private Subject<String> typeObservable = PublishSubject.create();
+    private String companyName = "Bakkerij Lierman"; // TODO - Use can choose company name
 
     /**
      * Instantiates a new Domain controller.
@@ -64,6 +65,24 @@ public class DomainController {
     }
 
     /**
+     * Gets company name.
+     *
+     * @return the company name
+     */
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    /**
+     * Sets company name.
+     *
+     * @param companyName the company name
+     */
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    /**
      * Export items to pdf in directory.
      *
      * @param directory the directory
@@ -73,6 +92,9 @@ public class DomainController {
         System.out.println("Exporting to " + directory);
     }
 
+    /**
+     * Close persistency.
+     */
     public void closePersistency() {
         GenericDao.closePersistency();
     }
