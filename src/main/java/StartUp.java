@@ -21,7 +21,7 @@ public class StartUp extends Application {
         primaryStage.setScene(scene);
 
         // Set title and show app
-        primaryStage.setTitle(domainController.getText("Title"));
+        primaryStage.setTitle(domainController.getCompanyName() + ": " + domainController.getText("Title"));
         primaryStage.show();
 
         // Sets initial type
