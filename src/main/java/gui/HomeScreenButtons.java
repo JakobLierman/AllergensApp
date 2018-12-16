@@ -96,11 +96,16 @@ public class HomeScreenButtons extends AnchorPane implements Initializable {
 
         if (file != null) {
             String destination = file.getAbsolutePath();
-            domainController.export(destination); // TODO - Try-catch
-
-            // Popup export complete
-            String text = domainController.getText("exportComplete");
-            PopupMessage.showInformationMessage(text, "", text);
+            try {
+                domainController.export(destination);
+                // Popup export complete
+                String text = domainController.getText("exportComplete");
+                PopupMessage.showInformationMessage(text, "", text);
+            } catch (Exception e) {
+                String title = domainController.getText("Oops");
+                String headerText = domainController.getText("Wrong");
+                PopupMessage.showErrorMessage(title, headerText, e.getMessage());
+            }
         }
     }
 

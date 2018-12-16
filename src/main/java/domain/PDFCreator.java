@@ -6,15 +6,14 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
  * The type Pdf creator.
  */
-public class PDFCreator {
+class PDFCreator {
 
     private PDDocument document;
 
@@ -26,11 +25,8 @@ public class PDFCreator {
 
     /**
      * Create a pdf document.
-     *
-     * @param documentName the document name
-     * @param companyName  the company name
      */
-    protected void create(String documentName, String companyName) {
+    void create(String documentName, String companyName) {
         document = new PDDocument();
         PDDocumentInformation information = document.getDocumentInformation();
         information.setAuthor(companyName);
@@ -44,13 +40,14 @@ public class PDFCreator {
      * @param lines the lines
      * @throws IOException the io exception
      */
-    private void addPage(String[] lines) throws IOException {
+    void addPage(String[] lines) throws IOException {
         PDPage page = new PDPage(PDRectangle.A4);
         document.addPage(page);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
         // Font settings
-        PDFont font = PDType0Font.load(document, new File("/Roboto/Roboto-Regular.ttf"));
+        //PDFont font = PDType0Font.load(document, new File("/Roboto/Roboto-Regular.ttf"));
+        PDFont font = PDType1Font.HELVETICA;
         float fontSize = 12;
         float leading = 1.5f * fontSize;
 
@@ -79,7 +76,7 @@ public class PDFCreator {
      * @param fileName  the file name
      * @throws IOException the io exception
      */
-    protected void save(String directory, String fileName) throws IOException {
+    void save(String directory, String fileName) throws IOException {
         String filePath = directory + "/" + fileName + ".pdf";
         document.save(filePath);
         document.close();

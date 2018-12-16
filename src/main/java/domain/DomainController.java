@@ -4,6 +4,7 @@ import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 import repository.GenericDao;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
@@ -86,10 +87,72 @@ public class DomainController {
      * Export items to pdf in directory.
      *
      * @param directory the directory
+     * @throws IOException the io exception
      */
-    public void export(String directory) {
-        // TODO - Implement
-        System.out.println("Exporting to " + directory);
+    public void export(String directory) throws IOException {
+        // Create pdf
+        pdf.create(getText("Export"), companyName);
+
+        /*
+        // Description page
+        StringBuilder allergensString = new StringBuilder();
+        for (Allergen allergen : productManager.getAllergens()) {
+            allergensString.append(allergen.toString());
+            allergensString.append(": ");
+            // TODO - add image
+            allergensString.append(System.lineSeparator());
+        }
+        addPdfPage(allergensString.toString());
+        // Add empty page (for double-sided printing)
+        addPdfPage("");
+        */
+
+        // Add product with ingredients with allergens
+        StringBuilder contentStringBuilder = new StringBuilder();
+        contentStringBuilder.append(getText("Products"));
+        contentStringBuilder.append(System.lineSeparator());
+        contentStringBuilder.append("------------------------------");
+        productManager.getProducts().forEach(product -> {
+            contentStringBuilder.append(System.lineSeparator());
+            contentStringBuilder.append(System.lineSeparator());
+            contentStringBuilder.append(product.toString());
+            contentStringBuilder.append(System.lineSeparator());
+            contentStringBuilder.append(getText("Description")).append(": ");
+            contentStringBuilder.append(product.getDescription());
+            contentStringBuilder.append(System.lineSeparator());
+            contentStringBuilder.append(getText("Allergens")).append(": ");
+            String prefix = "";
+            for (Allergen allergen : product.getAllergens()) {
+                contentStringBuilder.append(prefix);
+                contentStringBuilder.append(allergen.toString());
+                prefix = ", ";
+            }
+        });
+        addPdfPage(contentStringBuilder.toString());
+
+        // Save pdf
+        pdf.save(directory, getText("Allergens") + " " + companyName);
+    }
+
+    private void addPdfPage(String content) throws IOException {
+        String lines[] = content.split(System.lineSeparator());
+        final int linesPerPage = 40;
+
+        int numOfPages = (int) Math.ceil((double) lines.length / linesPerPage);
+        String[][] output = new String[numOfPages][];
+
+        for (int i = 0; i < numOfPages; ++i) {
+            int start = i * linesPerPage;
+            int length = Math.min(lines.length - start, linesPerPage);
+
+            String[] temp = new String[length];
+            System.arraycopy(lines, start, temp, 0, length);
+            output[i] = temp;
+        }
+
+        for (String[] linesInPage : output) {
+            pdf.addPage(linesInPage);
+        }
     }
 
     /**
