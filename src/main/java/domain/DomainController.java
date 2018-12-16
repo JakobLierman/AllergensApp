@@ -2,6 +2,7 @@ package domain;
 
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
+import repository.GenericDao;
 
 import java.util.ResourceBundle;
 
@@ -70,6 +71,10 @@ public class DomainController {
     public void export(String directory) {
         // TODO - Implement
         System.out.println("Exporting to " + directory);
+    }
+
+    public void closePersistency() {
+        GenericDao.closePersistency();
     }
 
 //     /**

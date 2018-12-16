@@ -33,7 +33,7 @@ public class StartUp extends Application {
 
         // Close app
         primaryStage.setOnCloseRequest(e -> {
-            System.out.println("Closed");
+            domainController.closePersistency();
             System.exit(0);
         });
     }
